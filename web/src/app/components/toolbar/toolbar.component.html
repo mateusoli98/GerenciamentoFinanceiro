@@ -1,7 +1,12 @@
 <mat-toolbar color="primary">
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-     <mat-icon>menu</mat-icon>
-   </button>
-   <span>My App</span>
-   
- </mat-toolbar>
+  <button
+    mat-icon-button
+    class="example-icon"
+    aria-label="Example icon-button with menu icon"
+    (click)="toggleMenu()"
+  >
+    <mat-icon *ngIf="!toggle">menu</mat-icon>
+    <mat-icon *ngIf="toggle">menu_open</mat-icon>
+  </button>
+  <span>Gerenciamento Financeiro</span>
+</mat-toolbar>
