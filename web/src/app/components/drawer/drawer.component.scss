@@ -1,7 +1,38 @@
 mat-drawer-container {
   height: 100%;
 
-  mat-drawer{
-      min-width: 300px;
+  mat-drawer {
+    width: 300px;
   }
+}
+
+.profile-menu {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+
+  img {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: #ececec;
+  }
+
+  b {
+    margin-top: 10px;
+  }
+}
+
+.mat-expansion-panel:not([class*="mat-elevation-z"]) {
+  box-shadow: none;
+}
+
+.menu {
+  padding: 1rem;
+}
+
+main {
+  padding: 1.5rem;
 }

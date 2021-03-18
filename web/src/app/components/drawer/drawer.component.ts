@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
+import { routers } from './routers';
 
 @Component({
   selector: 'app-drawer',
@@ -9,6 +10,8 @@ import { Store, select } from '@ngrx/store';
 })
 export class DrawerComponent implements OnInit {
   public drawerState$: Observable<any> | undefined;
+  public panelMenu: boolean = false;
+  public routers = routers;
 
   constructor(private store: Store<{ DrawerReducer: any }>) {}
 
