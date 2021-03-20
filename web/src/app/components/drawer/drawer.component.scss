@@ -2,7 +2,7 @@ mat-drawer-container {
   height: 100%;
 
   mat-drawer {
-    width: 300px;
+    width: 250px;
     background-color: #0f1835;
   }
 }
@@ -11,9 +11,8 @@ mat-drawer-container {
   box-shadow: none;
 }
 
-
 main {
   padding: 1.5rem;
-  height: 100%;
+  height: calc(100% - 3rem - 64px);
   background-color: #f5f6fa;
 }

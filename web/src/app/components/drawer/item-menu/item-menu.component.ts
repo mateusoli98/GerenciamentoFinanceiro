@@ -9,6 +9,7 @@ export class ItemMenuComponent implements OnInit {
 
   @Input() router: string = '';
   @Input() description: string = '';
+  @Input() icon: string = '';
 
   constructor() { }
 

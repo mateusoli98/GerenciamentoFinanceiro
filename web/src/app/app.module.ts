@@ -23,6 +23,10 @@ import { ItemMenuComponent } from './components/drawer/item-menu/item-menu.compo
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { TitlePageComponent } from './components/title-page/title-page.component';
 import { BarChartComponent } from './components/charts/bar-chart/bar-chart.component';
+import { FinancialControlComponent } from './pages/financial-control/financial-control.component';
+import { ObjectivesComponent } from './pages/objectives/objectives.component';
+import { PlanningComponent } from './pages/planning/planning.component';
+import { FinancialEducationComponent } from './pages/financial-education/financial-education.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +37,10 @@ import { BarChartComponent } from './components/charts/bar-chart/bar-chart.compo
     DashboardComponent,
     TitlePageComponent,
     BarChartComponent,
+    FinancialControlComponent,
+    ObjectivesComponent,
+    PlanningComponent,
+    FinancialEducationComponent,
   ],
   imports: [
     BrowserModule,
