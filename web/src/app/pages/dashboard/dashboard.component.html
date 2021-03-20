@@ -1,4 +1,29 @@
-<div class="title-page">
-    
+<app-title-page title="Dashboard"></app-title-page>
+
+<div class="container">
+  <mat-card class="m-1">
+    <div class="content">
+      <span>Saldo</span>
+      <b><span>R$</span>500,00</b>
+    </div>
+    <mat-icon color="primary">attach_money</mat-icon>
+  </mat-card>
+  <mat-card class="m-1">
+    <div class="content">
+      <span>Receitas</span>
+      <b><span>R$</span>500,00</b>
+    </div>
+    <mat-icon style="color: #0bcc0b">trending_up</mat-icon>
+  </mat-card>
+  <mat-card class="m-1">
+    <div class="content">
+      <span>Despesas</span>
+      <b><span>R$</span>500,00</b>
+    </div>
+    <mat-icon color="warn">trending_down</mat-icon>
+  </mat-card>
 </div>
 
+<mat-card class="m-1">
+  <app-bar-chart></app-bar-chart>
+</mat-card>

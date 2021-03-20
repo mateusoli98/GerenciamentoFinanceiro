@@ -1,18 +1,14 @@
 <mat-drawer-container autosize>
   <mat-drawer mode="side" [opened]="toggle">
-    <div class="profile-menu">
-      <img src="../../../assets/images/user-not-found.png" alt="" />
-      <b>Mateus Oliveira</b>
-      <span>mateus@email.com</span>
-    </div>
+
     <mat-divider></mat-divider>
-    <div class="menu">
+  
       <app-item-menu
         *ngFor="let item of routers"
         [description]="item.description"
         [router]="item.router"
       ></app-item-menu>
-    </div>
+
   </mat-drawer>
 
   <app-toolbar></app-toolbar>

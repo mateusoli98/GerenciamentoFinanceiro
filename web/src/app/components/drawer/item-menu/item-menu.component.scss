@@ -1,18 +1,17 @@
 .item-menu {
   font-size: 14px;
-  font-weight: bold;
   text-decoration: none;
-  color: #565656;
+  color: #ffffff;
 
   div {
     display: flex;
     align-items: center;
     padding: 0.7rem;
-    border-radius: 5px;
   }
 }
 
 .active div {
-  background-color: #f3edff;
-  color: #8851ff;
+  background-color: #38415d;
+  color: #ffffff;
+  border-left: 3px solid #4e83ab;
 }

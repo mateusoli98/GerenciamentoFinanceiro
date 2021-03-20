@@ -11,13 +11,18 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatCardModule } from '@angular/material/card';
 
 import { StoreModule } from '@ngrx/store';
 import { store } from './store';
 
+import { NgApexchartsModule } from 'ng-apexcharts';
+
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { ItemMenuComponent } from './components/drawer/item-menu/item-menu.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { TitlePageComponent } from './components/title-page/title-page.component';
+import { BarChartComponent } from './components/charts/bar-chart/bar-chart.component';
 
 @NgModule({
   declarations: [
@@ -26,18 +31,22 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
     ToolbarComponent,
     ItemMenuComponent,
     DashboardComponent,
+    TitlePageComponent,
+    BarChartComponent,
   ],
   imports: [
     BrowserModule,
     StoreModule.forRoot({ ...store }),
     AppRoutingModule,
     BrowserAnimationsModule,
+    NgApexchartsModule,
     MatSidenavModule,
     MatButtonModule,
     MatToolbarModule,
     MatIconModule,
     MatDividerModule,
     MatExpansionModule,
+    MatCardModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
