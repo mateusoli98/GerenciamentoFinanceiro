@@ -1,12 +1,22 @@
 <mat-toolbar>
-  <button
-    mat-icon-button
-    class="example-icon"
-    aria-label="Example icon-button with menu icon"
-    (click)="toggleMenu()"
-  >
-    <mat-icon *ngIf="!toggle">menu</mat-icon>
-    <mat-icon *ngIf="toggle">menu_open</mat-icon>
-  </button>
-
+  <div class="flex-grow-1">
+    <button mat-icon-button (click)="toggleMenu()">
+      <mat-icon *ngIf="!toggle">menu</mat-icon>
+      <mat-icon *ngIf="toggle">menu_open</mat-icon>
+    </button>
+  </div>
+  <div class="toolbar-menu">
+    <div class="notification pr-1 pl-1">
+      <mat-icon>notifications_none</mat-icon>
+    </div>
+    <div class="menu-profile pr-1 pl-1">
+      <span mat-button [matMenuTriggerFor]="menu"
+        >Mateus <mat-icon>expand_more</mat-icon></span
+      >
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>Editar</button>
+        <button mat-menu-item>Sair</button>
+      </mat-menu>
+    </div>
+  </div>
 </mat-toolbar>
