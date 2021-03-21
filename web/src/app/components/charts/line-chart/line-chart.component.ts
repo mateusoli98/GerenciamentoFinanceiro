@@ -1,18 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import {
-  ChartComponent,
-  ApexAxisChartSeries,
-  ApexChart,
-  ApexXAxis,
-  ApexTitleSubtitle,
-} from 'ng-apexcharts';
-
-export type ChartOptions = {
-  series: ApexAxisChartSeries;
-  chart: ApexChart;
-  xaxis: ApexXAxis;
-  title: ApexTitleSubtitle;
-};
+import { ChartComponent } from 'ng-apexcharts';
 
 @Component({
   selector: 'app-line-chart',
@@ -32,10 +19,10 @@ export class LineChartComponent implements OnInit {
         },
         {
           name: 'Despesas',
-          data: [10 ,35, 62, 51, 148, 49, 41, 69, 91, ],
+          data: [10, 35, 62, 51, 148, 49, 41, 69, 91],
         },
       ],
-     
+
       chart: {
         height: 350,
         type: 'line',

@@ -14,7 +14,7 @@ body {
 }
 
 .d-flex {
-  display: flex;
+  display: flex !important;
 }
 
 .flex-grow-1 {
@@ -33,44 +33,48 @@ body {
   flex-direction: column;
 }
 
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
 .m-1 {
-  margin: 0.5rem;
+  margin: 0.5rem !important;
 }
 
 .mt-1 {
-  margin-top: 0.5rem;
+  margin-top: 0.5rem !important;
 }
 
 .mr-1 {
-  margin-right: 0.5rem;
+  margin-right: 0.5rem !important;
 }
 
 .mb-1 {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.5rem !important;
 }
 
 .ml-1 {
-  margin-left: 0.5rem;
+  margin-left: 0.5rem !important;
 }
 
 .p-1 {
-  padding: 0.5rem;
+  padding: 0.5rem !important;
 }
 
 .pt-1 {
-  padding-top: 0.5rem;
+  padding-top: 0.5rem !important;
 }
 
 .pr-1 {
-  padding-right: 0.5rem;
+  padding-right: 0.5rem !important;
 }
 
 .pb-1 {
-  padding-bottom: 0.5rem;
+  padding-bottom: 0.5rem !important;
 }
 
 .pl-1 {
-  padding-left: 0.5rem;
+  padding-left: 0.5rem !important;
 }
 
 table {

@@ -1,0 +1,14 @@
+.search-header {
+  input {
+    border-radius: 5px;
+    border: 1px solid #e0e0e0;
+    background-color: white;
+
+    &:focus {
+      outline: 0;
+    }
+  }
+}
+.cards-custom {
+  width: calc((100% - 1.5rem) / 3 - 0.5rem);
+}

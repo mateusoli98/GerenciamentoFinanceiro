@@ -16,6 +16,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 import { StoreModule } from '@ngrx/store';
 import { store } from './store';
@@ -33,6 +34,12 @@ import { PlanningComponent } from './pages/planning/planning.component';
 import { FinancialEducationComponent } from './pages/financial-education/financial-education.component';
 import { LineChartComponent } from './components/charts/line-chart/line-chart.component';
 import { DialogFinancialControlComponent } from './pages/financial-control/dialog-financial-control/dialog-financial-control.component';
+import { SearchHeaderComponent } from './components/search-header/search-header.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { DialogNewObjectivesComponent } from './pages/objectives/dialog-new-objectives/dialog-new-objectives.component';
+import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
+import { RadialChartComponent } from './components/charts/radial-chart/radial-chart.component';
+import { CardObjectiveComponent } from './pages/objectives/card-objective/card-objective.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +56,10 @@ import { DialogFinancialControlComponent } from './pages/financial-control/dialo
     FinancialEducationComponent,
     LineChartComponent,
     DialogFinancialControlComponent,
+    SearchHeaderComponent,
+    DialogNewObjectivesComponent,
+    RadialChartComponent,
+    CardObjectiveComponent,
   ],
   imports: [
     BrowserModule,
@@ -56,6 +67,7 @@ import { DialogFinancialControlComponent } from './pages/financial-control/dialo
     AppRoutingModule,
     BrowserAnimationsModule,
     NgApexchartsModule,
+    ReactiveFormsModule,
     MatSidenavModule,
     MatButtonModule,
     MatToolbarModule,
@@ -67,9 +79,14 @@ import { DialogFinancialControlComponent } from './pages/financial-control/dialo
     MatTableModule,
     MatDialogModule,
     MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
-  providers: [],
-  entryComponents: [DialogFinancialControlComponent],
+  providers: [{provide: MAT_DATE_LOCALE, useValue: 'pt-br'},],
+  entryComponents: [
+    DialogFinancialControlComponent,
+    DialogNewObjectivesComponent,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

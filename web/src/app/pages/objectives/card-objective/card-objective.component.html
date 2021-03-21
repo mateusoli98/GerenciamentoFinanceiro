@@ -1,0 +1,18 @@
+<mat-card class="example-card">
+  <mat-card-header>
+    <mat-card-title>{{data.name}} - {{data.price}}</mat-card-title>
+    <mat-card-subtitle class="d-flex flex-direction-column">
+      <span>Acaba em: {{data.date}} </span>
+      <span>Economize: {{data.priceMonth}} / mês</span>
+    </mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content >
+    <app-radial-chart [percentage]="data.percentage" [label]="data.priceActual"></app-radial-chart>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-stroked-button color="primary">
+      <mat-icon>add</mat-icon>
+      Nova entrada
+    </button>
+  </mat-card-actions>
+</mat-card>

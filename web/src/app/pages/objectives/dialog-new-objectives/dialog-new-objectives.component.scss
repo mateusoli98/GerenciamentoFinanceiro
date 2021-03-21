@@ -1,0 +1,7 @@
+mat-form-field {
+  width: calc(50% - 1rem);
+
+  &:last-child {
+    width: 100%;
+  }
+}

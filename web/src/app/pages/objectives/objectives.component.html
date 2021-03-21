@@ -1,1 +1,9 @@
 <app-title-page title="Objetivos"></app-title-page>
+
+<app-search-header (newItemEvent)="openDialog($event)"></app-search-header>
+
+<div class="mt-1 d-flex flex-wrap">
+  <div class="m-1 cards-custom" *ngFor="let data of listDataObjetctives">
+    <app-card-objective [data]="data"></app-card-objective>
+  </div>
+</div>
