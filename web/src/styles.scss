@@ -13,10 +13,25 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+.d-flex {
+  display: flex;
+}
+
 .flex-grow-1 {
   flex-grow: 1;
 }
 
+.justify-content-center {
+  justify-content: center;
+}
+
+.justify-content-end {
+  justify-content: flex-end;
+}
+
+.flex-direction-column {
+  flex-direction: column;
+}
 
 .m-1 {
   margin: 0.5rem;
@@ -56,4 +71,8 @@ body {
 
 .pl-1 {
   padding-left: 0.5rem;
+}
+
+table {
+  width: 100%;
 }

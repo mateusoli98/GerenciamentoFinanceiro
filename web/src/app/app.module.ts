@@ -13,6 +13,9 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatTableModule } from '@angular/material/table';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatInputModule } from '@angular/material/input';
 
 import { StoreModule } from '@ngrx/store';
 import { store } from './store';
@@ -28,6 +31,8 @@ import { FinancialControlComponent } from './pages/financial-control/financial-c
 import { ObjectivesComponent } from './pages/objectives/objectives.component';
 import { PlanningComponent } from './pages/planning/planning.component';
 import { FinancialEducationComponent } from './pages/financial-education/financial-education.component';
+import { LineChartComponent } from './components/charts/line-chart/line-chart.component';
+import { DialogFinancialControlComponent } from './pages/financial-control/dialog-financial-control/dialog-financial-control.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +47,8 @@ import { FinancialEducationComponent } from './pages/financial-education/financi
     ObjectivesComponent,
     PlanningComponent,
     FinancialEducationComponent,
+    LineChartComponent,
+    DialogFinancialControlComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,8 +64,12 @@ import { FinancialEducationComponent } from './pages/financial-education/financi
     MatExpansionModule,
     MatCardModule,
     MatMenuModule,
+    MatTableModule,
+    MatDialogModule,
+    MatInputModule,
   ],
   providers: [],
+  entryComponents: [DialogFinancialControlComponent],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

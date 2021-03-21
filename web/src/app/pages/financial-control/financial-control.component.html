@@ -1,1 +1,60 @@
 <app-title-page title="Controle de finanças"></app-title-page>
+<div class="container d-flex">
+  <mat-card class="m-1 flex-grow-1">
+    <div class="content">
+      <span>Saldo</span>
+      <b><span>R$</span>500,00</b>
+    </div>
+    <mat-icon color="primary">attach_money</mat-icon>
+  </mat-card>
+  <mat-card class="m-1 flex-grow-1">
+    <div class="content">
+      <span>Receitas</span>
+      <b><span>R$</span>500,00</b>
+    </div>
+    <div class="icon-dialog" (click)="openDialog(true)">
+      <mat-icon style="color: #0bcc0b">add</mat-icon>
+    </div>
+  </mat-card>
+  <mat-card class="m-1 flex-grow-1">
+    <div class="content">
+      <span>Despesas</span>
+      <b><span>R$</span>500,00</b>
+    </div>
+    <div class="icon-dialog" (click)="openDialog(false)">
+      <mat-icon color="warn">remove</mat-icon>
+    </div>
+  </mat-card>
+</div>
+
+<div class="d-flex">
+  <mat-card class="m-1 flex-grow-1">
+    <app-line-chart></app-line-chart>
+  </mat-card>
+  <mat-card class="m-1 card-custom">
+    <table mat-table [dataSource]="dataSource">
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Nome</th>
+        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="value">
+        <th mat-header-cell *matHeaderCellDef>Valor</th>
+        <td mat-cell *matCellDef="let element">{{ element.value }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="indicator">
+        <th mat-header-cell *matHeaderCellDef>Indicador</th>
+        <td mat-cell *matCellDef="let element">
+          <mat-icon *ngIf="element.isIncome" style="color: #0bcc0b">
+            add
+          </mat-icon>
+          <mat-icon *ngIf="!element.isIncome" color="warn">remove</mat-icon>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </mat-card>
+</div>
