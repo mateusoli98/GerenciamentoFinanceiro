@@ -1,0 +1,17 @@
+.item {
+  border: 1px solid #e0e0e0;
+  border-radius: 3px;
+  padding: 3rem;
+  cursor: pointer;
+
+  p {
+    font-size: 1rem;
+  }
+
+  &:hover {
+    border: 1px solid #673ab7;
+    color: #673ab7;
+    background-color: #fcfaff;
+    transition: 0.5s;
+  }
+}

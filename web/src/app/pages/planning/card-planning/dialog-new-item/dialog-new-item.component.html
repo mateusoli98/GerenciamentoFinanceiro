@@ -1,0 +1,42 @@
+<h1 mat-dialog-title>Adicionar item</h1>
+<div mat-dialog-content>
+  <form class="d-flex flex-direction-column" >
+    <mat-form-field>
+      <mat-label>Nome</mat-label>
+      <input matInput type="text" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Valor estimado</mat-label>
+      <input matInput type="number" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Categoria</mat-label>
+      <mat-select>
+        <mat-option value="food">Alimentação</mat-option>
+        <mat-option value="school">Escola</mat-option>
+        <mat-option value="costFixed">Custos fixos</mat-option>
+        <mat-option value="fuel">Combustível</mat-option>
+        <mat-option value="book">Livros </mat-option>
+        <mat-option value="transportation">Transporte</mat-option>
+        <mat-option value="tuition">Mensalidade</mat-option>
+        <mat-option value="new">Nova categoria</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <mat-label>Integrante</mat-label>
+        <input type="text" matInput [matAutocomplete]="auto" />
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option> João </mat-option>
+          <mat-option> Maria </mat-option>
+          <mat-option> José </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions class="d-flex justify-content-end">
+  <button mat-raised-button mat-dialog-close>Cancelar</button>
+  <button mat-raised-button color="primary" cdkFocusInitial>Salvar</button>
+</div>

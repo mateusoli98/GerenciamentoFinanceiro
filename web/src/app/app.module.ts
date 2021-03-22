@@ -18,6 +18,9 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatSelectModule } from '@angular/material/select';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatChipsModule } from '@angular/material/chips';
 
 import { StoreModule } from '@ngrx/store';
 import { store } from './store';
@@ -43,6 +46,8 @@ import { RadialChartComponent } from './components/charts/radial-chart/radial-ch
 import { CardObjectiveComponent } from './pages/objectives/card-objective/card-objective.component';
 import { PostComponent } from './pages/financial-education/post/post.component';
 import { CardPlanningComponent } from './pages/planning/card-planning/card-planning.component';
+import { DialogPlanningComponent } from './pages/planning/dialog-planning/dialog-planning.component';
+import { DialogNewItemComponent } from './pages/planning/card-planning/dialog-new-item/dialog-new-item.component';
 
 @NgModule({
   declarations: [
@@ -65,6 +70,8 @@ import { CardPlanningComponent } from './pages/planning/card-planning/card-plann
     CardObjectiveComponent,
     PostComponent,
     CardPlanningComponent,
+    DialogPlanningComponent,
+    DialogNewItemComponent,
   ],
   imports: [
     BrowserModule,
@@ -87,11 +94,16 @@ import { CardPlanningComponent } from './pages/planning/card-planning/card-plann
     MatDatepickerModule,
     MatNativeDateModule,
     MatProgressBarModule,
+    MatSelectModule,
+    MatAutocompleteModule,
+    MatChipsModule,
   ],
   providers: [{ provide: MAT_DATE_LOCALE, useValue: 'pt-br' }],
   entryComponents: [
     DialogFinancialControlComponent,
     DialogNewObjectivesComponent,
+    DialogPlanningComponent,
+    DialogNewItemComponent,
   ],
   bootstrap: [AppComponent],
 })
