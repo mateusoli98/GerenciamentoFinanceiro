@@ -17,6 +17,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 import { StoreModule } from '@ngrx/store';
 import { store } from './store';
@@ -41,6 +42,7 @@ import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { RadialChartComponent } from './components/charts/radial-chart/radial-chart.component';
 import { CardObjectiveComponent } from './pages/objectives/card-objective/card-objective.component';
 import { PostComponent } from './pages/financial-education/post/post.component';
+import { CardPlanningComponent } from './pages/planning/card-planning/card-planning.component';
 
 @NgModule({
   declarations: [
@@ -62,6 +64,7 @@ import { PostComponent } from './pages/financial-education/post/post.component';
     RadialChartComponent,
     CardObjectiveComponent,
     PostComponent,
+    CardPlanningComponent,
   ],
   imports: [
     BrowserModule,
@@ -82,9 +85,10 @@ import { PostComponent } from './pages/financial-education/post/post.component';
     MatDialogModule,
     MatInputModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatProgressBarModule,
   ],
-  providers: [{provide: MAT_DATE_LOCALE, useValue: 'pt-br'},],
+  providers: [{ provide: MAT_DATE_LOCALE, useValue: 'pt-br' }],
   entryComponents: [
     DialogFinancialControlComponent,
     DialogNewObjectivesComponent,

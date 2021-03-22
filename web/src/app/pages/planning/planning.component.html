@@ -1,1 +1,22 @@
 <app-title-page title="Planejamento"></app-title-page>
+
+<app-search-header (newItemEvent)="openDialog($event)"></app-search-header>
+
+<span class="subtitle d-flex align-items-center mt-1">
+  <mat-icon>person</mat-icon> Pessoal</span
+>
+<div class="d-flex flex-wrap">
+  <div class="m-1 card-planning-custom" *ngFor="let planning of plannings">
+    <app-card-planning [data]="planning"></app-card-planning>
+  </div>
+</div>
+
+<span class="subtitle d-flex align-items-center mt-1">
+  <mat-icon>groups</mat-icon> Grupo</span
+>
+
+<div class="d-flex flex-wrap">
+  <div class="m-1 card-planning-custom" *ngFor="let planning of planningGroup">
+    <app-card-planning [data]="planning"></app-card-planning>
+  </div>
+</div>
