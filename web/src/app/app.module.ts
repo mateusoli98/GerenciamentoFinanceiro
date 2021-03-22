@@ -40,6 +40,7 @@ import { DialogNewObjectivesComponent } from './pages/objectives/dialog-new-obje
 import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { RadialChartComponent } from './components/charts/radial-chart/radial-chart.component';
 import { CardObjectiveComponent } from './pages/objectives/card-objective/card-objective.component';
+import { PostComponent } from './pages/financial-education/post/post.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { CardObjectiveComponent } from './pages/objectives/card-objective/card-o
     DialogNewObjectivesComponent,
     RadialChartComponent,
     CardObjectiveComponent,
+    PostComponent,
   ],
   imports: [
     BrowserModule,

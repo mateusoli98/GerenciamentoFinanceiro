@@ -1,16 +1,11 @@
 <form [formGroup]="form" class="d-flex search-header">
-  <input
-    class="pl-1 mr-1 flex-grow-1"
-    matInput
-    type="search"
-    placeholder="Buscar"
-  />
-  <div class="mr-1">
+  <input class="pl-1 flex-grow-1" matInput type="search" placeholder="Buscar" />
+  <div class="ml-1">
     <button mat-raised-button color="primary">
       <mat-icon>search</mat-icon>
     </button>
   </div>
-  <div>
+  <div class="ml-1" *ngIf="visibleNewItem">
     <button mat-stroked-button color="primary" (click)="newItemEmit()">
       <mat-icon>add</mat-icon>
     </button>

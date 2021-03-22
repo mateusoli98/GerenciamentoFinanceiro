@@ -1,1 +1,9 @@
 <app-title-page title="Educação finaceira"></app-title-page>
+
+<app-search-header [visibleNewItem]="false"></app-search-header>
+
+<div class="mt-1 d-flex flex-wrap">
+  <div class="m-1 posts-custom" *ngFor="let post of posts">
+    <app-post [data]="post"></app-post>
+  </div>
+</div>
