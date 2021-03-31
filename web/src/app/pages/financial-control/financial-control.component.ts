@@ -9,7 +9,7 @@ export interface balance {
 }
 
 const ELEMENT_DATA: balance[] = [
-  { name: 'Sálario', value: 4500, isIncome: true },
+  { name: 'Sálario', value: 8500, isIncome: true },
   { name: 'Refeição', value: 50, isIncome: false },
   { name: 'Abastacimento', value: 150, isIncome: false },
   { name: 'Venda de tênis', value: 150, isIncome: true },

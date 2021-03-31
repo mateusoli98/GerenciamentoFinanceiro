@@ -15,7 +15,20 @@ export class BarChartComponent implements OnInit {
       series: [
         {
           name: 'My-series',
-          data: [10, 41, 35, 51, 49, 62, 69, 91, 148],
+          data: [
+            1900,
+            2698,
+            2585,
+            3112,
+            3895,
+            5500,
+            7502,
+            10023,
+            17356,
+            26358,
+            29631,
+            33268,
+          ],
         },
       ],
       chart: {
@@ -23,19 +36,22 @@ export class BarChartComponent implements OnInit {
         type: 'bar',
       },
       title: {
-        text: 'My First Angular Chart',
+        text: 'Saldo no último ano',
       },
       xaxis: {
         categories: [
           'Jan',
-          'Feb',
+          'Fev',
           'Mar',
-          'Apr',
-          'May',
+          'Abr',
+          'Mai',
           'Jun',
           'Jul',
           'Aug',
-          'Sep',
+          'Set',
+          'Out',
+          'Nov',
+          'Dez',
         ],
       },
     };
