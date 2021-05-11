@@ -1,0 +1,28 @@
+<section class="d-flex justify-content-center align-items-center">
+  <mat-card class="card-custom d-flex">
+    <div class="box-left"></div>
+    <div class="box-right">
+      <h1 class="text-align-center">Login</h1>
+      <form class="d-flex flex-direction-column">
+        <mat-form-field>
+          <mat-label>Usuário</mat-label>
+          <input matInput type="text" />
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Senha</mat-label>
+          <input matInput [type]="hide ? 'password' : 'text'" />
+          <button
+            mat-icon-button
+            matSuffix
+            (click)="hide = !hide"
+            [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide"
+          >
+            <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+          </button>
+        </mat-form-field>
+      </form>
+    </div>
+  </mat-card>
+</section>

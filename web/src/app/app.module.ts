@@ -48,6 +48,7 @@ import { PostComponent } from './pages/financial-education/post/post.component';
 import { CardPlanningComponent } from './pages/planning/card-planning/card-planning.component';
 import { DialogPlanningComponent } from './pages/planning/dialog-planning/dialog-planning.component';
 import { DialogNewItemComponent } from './pages/planning/card-planning/dialog-new-item/dialog-new-item.component';
+import { LoginComponent } from './pages/login/login.component';
 
 @NgModule({
   declarations: [
@@ -72,6 +73,7 @@ import { DialogNewItemComponent } from './pages/planning/card-planning/dialog-ne
     CardPlanningComponent,
     DialogPlanningComponent,
     DialogNewItemComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
