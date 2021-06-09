@@ -3,10 +3,12 @@
     "target": "es5",
     "module": "commonjs",
     "strict": true,
+    "strictPropertyInitialization": false,
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "strictNullChecks": false
   }
 }
