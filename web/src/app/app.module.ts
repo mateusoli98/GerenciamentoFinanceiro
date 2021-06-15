@@ -48,7 +48,12 @@ import { PostComponent } from './pages/financial-education/post/post.component';
 import { CardPlanningComponent } from './pages/planning/card-planning/card-planning.component';
 import { DialogPlanningComponent } from './pages/planning/dialog-planning/dialog-planning.component';
 import { DialogNewItemComponent } from './pages/planning/card-planning/dialog-new-item/dialog-new-item.component';
-import { LoginComponent } from './pages/login/login.component';
+import { LoginComponent } from './pages/authentication/login/login.component';
+import { HomeComponent } from './pages/home/home.component';
+import { AccountComponent } from './pages/authentication/account/account.component';
+import { HttpClientModule } from '@angular/common/http';
+
+import { httpInterceptorProviders } from './http-interceptors';
 
 @NgModule({
   declarations: [
@@ -74,14 +79,17 @@ import { LoginComponent } from './pages/login/login.component';
     DialogPlanningComponent,
     DialogNewItemComponent,
     LoginComponent,
+    HomeComponent,
+    AccountComponent,
   ],
   imports: [
     BrowserModule,
+    ReactiveFormsModule,
+    HttpClientModule,
     StoreModule.forRoot({ ...store }),
     AppRoutingModule,
     BrowserAnimationsModule,
     NgApexchartsModule,
-    ReactiveFormsModule,
     MatSidenavModule,
     MatButtonModule,
     MatToolbarModule,
@@ -100,7 +108,10 @@ import { LoginComponent } from './pages/login/login.component';
     MatAutocompleteModule,
     MatChipsModule,
   ],
-  providers: [{ provide: MAT_DATE_LOCALE, useValue: 'pt-br' }],
+  providers: [
+    httpInterceptorProviders,
+    { provide: MAT_DATE_LOCALE, useValue: 'pt-br' },
+  ],
   entryComponents: [
     DialogFinancialControlComponent,
     DialogNewObjectivesComponent,

@@ -3,25 +3,39 @@
     <div class="box-left"></div>
     <div class="box-right">
       <h1 class="text-align-center">Login</h1>
-      <form class="d-flex flex-direction-column">
+      <form class="d-flex flex-direction-column" [formGroup]="form">
         <mat-form-field>
           <mat-label>Usuário</mat-label>
-          <input matInput type="text" />
+          <input matInput type="text" formControlName="email" />
         </mat-form-field>
 
         <mat-form-field>
           <mat-label>Senha</mat-label>
-          <input matInput [type]="hide ? 'password' : 'text'" />
-          <button
+          <input
+            matInput
+            [type]="hide ? 'password' : 'text'"
+            formControlName="password"
+          />
+          <span
             mat-icon-button
             matSuffix
             (click)="hide = !hide"
             [attr.aria-label]="'Hide password'"
             [attr.aria-pressed]="hide"
+            style="cursor: pointer"
           >
             <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
-          </button>
+          </span>
         </mat-form-field>
+
+        <div class="d-flex justify-content-space-evenly">
+          <button mat-raised-button color="primary" (click)="onSubmitForm()">
+            Entrar
+          </button>
+          <button mat-button color="primary" (click)="navigateCreateAccount()">
+            Criar conta
+          </button>
+        </div>
       </form>
     </div>
   </mat-card>

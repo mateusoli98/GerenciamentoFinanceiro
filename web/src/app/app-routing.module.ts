@@ -1,3 +1,9 @@
+import { RoutesEnum } from './enums/routes.unum';
+import { AccountComponent } from './pages/authentication/account/account.component';
+import { AppComponent } from './app.component';
+import { AuthGuard } from './guards/auth.guard';
+import { LoginComponent } from './pages/authentication/login/login.component';
+import { HomeComponent } from './pages/home/home.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -7,12 +13,35 @@ import { PlanningComponent } from './pages/planning/planning.component';
 import { ObjectivesComponent } from './pages/objectives/objectives.component';
 
 const routes: Routes = [
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'financial-control', component: FinancialControlComponent },
-  { path: 'objectives', component: ObjectivesComponent },
-  { path: 'planning', component: PlanningComponent },
-  { path: 'financial-education', component: FinancialEducationComponent },
-  { path: '**', redirectTo: '/dashboard' },
+  {
+    path: '',
+    component: HomeComponent,
+    children: [
+      { path: '', redirectTo: RoutesEnum.Dashboard, pathMatch: 'full' },
+      { path: RoutesEnum.Dashboard, component: DashboardComponent },
+      {
+        path: RoutesEnum.FinancialControl,
+        component: FinancialControlComponent,
+      },
+      { path: RoutesEnum.Objectives, component: ObjectivesComponent },
+      { path: RoutesEnum.Planning, component: PlanningComponent },
+      {
+        path: RoutesEnum.FinacialEducation,
+        component: FinancialEducationComponent,
+      },
+    ],
+    canActivate: [AuthGuard],
+  },
+  {
+    path: '',
+    component: AppComponent,
+    children: [
+      { path: '', redirectTo: RoutesEnum.Login, pathMatch: 'full' },
+      { path: RoutesEnum.Login, component: LoginComponent },
+      { path: RoutesEnum.Account, component: AccountComponent },
+    ],
+  },
+  { path: '**', redirectTo: '' },
 ];
 
 @NgModule({

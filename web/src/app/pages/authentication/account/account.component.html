@@ -1,0 +1,44 @@
+<section class="d-flex justify-content-center align-items-center">
+  <mat-card class="card-custom d-flex">
+    <div class="box-left"></div>
+    <div class="box-right">
+      <h1 class="text-align-center">Login</h1>
+      <form class="d-flex flex-direction-column" [formGroup]="form">
+        <mat-form-field>
+          <mat-label>Nome</mat-label>
+          <input matInput type="text" formControlName="name" />
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>E-mail</mat-label>
+          <input matInput type="text" formControlName="email" />
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Senha</mat-label>
+          <input
+            matInput
+            [type]="hide ? 'password' : 'text'"
+            formControlName="password"
+          />
+          <button
+            mat-icon-button
+            matSuffix
+            (click)="hide = !hide"
+            [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide"
+          >
+            <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+          </button>
+        </mat-form-field>
+
+        <div class="d-flex justify-content-space-evenly">
+          <button mat-raised-button color="primary">Criar conta</button>
+          <button mat-button color="primary" (click)="navigateLogin()">
+            Login
+          </button>
+        </div>
+      </form>
+    </div>
+  </mat-card>
+</section>
