@@ -3,7 +3,7 @@
 	"host": "localhost",
 	"port": 5432,
 	"username": "postgres",
-	"password": "1234",
+	"password": "123456",
 	"database": "db_gerenciamento_financeiro",
 	"entities": [
 		"./src/app/models/*.ts"
