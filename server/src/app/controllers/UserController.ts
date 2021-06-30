@@ -12,7 +12,7 @@ class UserController {
     const userExists = await repository.findOne({ where: { email } });
 
     if (userExists) {
-      return res.sendStatus(httpStatusCodeEnum.CONFLICT);
+      return res.sendStatus(httpStatusCodeEnum.Conflict);
     }
 
     const user = repository.create({ email, password });

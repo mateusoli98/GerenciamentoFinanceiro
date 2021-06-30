@@ -14,13 +14,13 @@ class AuthController {
     const user = await repository.findOne({ where: { email } });
 
     if (!user) {
-      return res.sendStatus(httpStatusCodeEnum.UNAUTHORIZED);
+      return res.sendStatus(httpStatusCodeEnum.Unauthorized);
     }
 
     const isValidPassword = bcrypt.compare(password, user.password);
 
     if (!isValidPassword) {
-      return res.sendStatus(httpStatusCodeEnum.UNAUTHORIZED);
+      return res.sendStatus(httpStatusCodeEnum.Unauthorized);
     }
 
     const token = jwt.sign({ id: user.id }, process.env.SECRET_OR_PRIVATE_KEY, {
