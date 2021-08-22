@@ -13,6 +13,6 @@ mat-drawer-container {
 
 main {
   padding: 1.5rem;
-  height: calc(100% - 3rem - 64px);
+  min-height: calc(100% - 64px);
   background-color: #f5f6fa;
 }
