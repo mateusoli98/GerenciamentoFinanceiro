@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { RoutesEnum } from 'src/app/enums/routes.enum';
 import { SignUpRequest } from 'src/app/models/request/authRequest.model';
 import { AuthService } from 'src/app/services/auth.service';
+import { SnackbarService } from 'src/app/services/snackbar.service';
 
 @Component({
   selector: 'app-account',
@@ -17,7 +18,8 @@ export class AccountComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private route: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private snackbarService: SnackbarService
   ) {}
 
   ngOnInit(): void {
@@ -45,11 +47,28 @@ export class AccountComponent implements OnInit {
     return this.form.get('password')?.value;
   }
 
+  get confirmPassword() {
+    return this.form.get('confirmPassword')?.value;
+  }
+
   navigateLogin() {
     this.route.navigate([RoutesEnum.Login]);
   }
 
-  onSubmitForm() {}
+  async onSubmitForm() {
+    const request = this.getRequest();
+
+    if (!this.validateForm()) return;
+
+    if (request) {
+      const result = await this.authService.createAccount(request).toPromise();
+
+      if (result) {
+        this.snackbarService.showMessage('Usuário criado com sucesso!');
+        this.navigateLogin();
+      }
+    }
+  }
 
   getRequest(): SignUpRequest | null {
     if (!this.name && !this.email && !this.password) {
@@ -61,5 +80,21 @@ export class AccountComponent implements OnInit {
       email: this.email,
       password: this.password,
     };
+  }
+
+  validateForm() {
+    let isValid: boolean = true;
+
+    if (this.form.get('email')?.invalid) {
+      this.snackbarService.showMessage('E-mail invalido');
+      isValid = false;
+    }
+
+    if (this.password !== this.confirmPassword) {
+      this.snackbarService.showMessage('Erro: As senhas não correspondem!');
+      isValid = false;
+    }
+
+    return isValid;
   }
 }

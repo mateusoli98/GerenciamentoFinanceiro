@@ -21,6 +21,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSelectModule } from '@angular/material/select';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { StoreModule } from '@ngrx/store';
 import { store } from './store';
@@ -107,6 +108,7 @@ import { httpInterceptorProviders } from './http-interceptors';
     MatSelectModule,
     MatAutocompleteModule,
     MatChipsModule,
+    MatSnackBarModule
   ],
   providers: [
     httpInterceptorProviders,

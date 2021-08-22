@@ -38,7 +38,7 @@ export class AuthService {
     return false;
   }
 
-  async createAccount(user: SignUpRequest) {
+  createAccount(user: SignUpRequest) {
     return this.http.post(
       `${environment.api}/${ServicesRoutesEnum.SignUp}`,
       user
