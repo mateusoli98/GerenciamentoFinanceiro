@@ -9,7 +9,7 @@ import AuthController from "./app/controllers/AuthController";
 
 const router = Router();
 
-router.post(RoutesEnum.SignUp, UserController.store);
+router.post(RoutesEnum.SignUp, UserController.signUp);
 router.post(RoutesEnum.Login, AuthController.authenticate);
 
 export default router;

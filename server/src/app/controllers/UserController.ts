@@ -1,27 +1,13 @@
 import { Request, Response } from "express";
-import { getRepository } from "typeorm";
-import { httpStatusCodeEnum } from "../enums/httpStatusCode.enum";
-
-import User from "../models/User";
+import UserApp from "../application/UserApp";
+import { ResultResponseModel } from "../models/ResultReponse";
+import ResultResponse from "./ResultResponse";
 
 class UserController {
-  async store(req: Request, res: Response) {
-    const repository = getRepository(User);
-    const { name, email, password } = req.body;
+  async signUp(req: Request, res: Response) {
+    let result: ResultResponseModel = await UserApp.create(req);
 
-    const userExists = await repository.findOne({ where: { email } });
-
-    if (userExists) {
-      return res.sendStatus(httpStatusCodeEnum.Conflict);
-    }
-
-    const user = repository.create({ name, email, password });
-    await repository.save(user);
-
-    delete user.password;
-    delete user.id;
-
-    return res.json(user);
+    return ResultResponse.result(result, res);
   }
 }
 

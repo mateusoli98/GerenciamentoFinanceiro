@@ -8,7 +8,7 @@ interface WarningModel {
   message: string;
 }
 
-export class ResultResponse {
+export class ResultResponseModel {
   public result: any;
   public errors: Array<ErrorModel>;
   public warnings: Array<WarningModel>;

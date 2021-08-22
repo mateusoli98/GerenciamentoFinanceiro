@@ -4,11 +4,11 @@ import jwt from "jsonwebtoken";
 import { httpStatusCodeEnum } from "../enums/httpStatusCode.enum";
 import AuthRepository from "../repository/AuthRepository";
 import { IAuthApp } from "./applicationInterfaces/IAuthApp";
-import { ResultResponse } from "../models/ResultReponse";
+import { ResultResponseModel } from "../models/ResultReponse";
 
 class AuthApp implements IAuthApp {
-  async authenticate(req: Request): Promise<ResultResponse> {
-    let response: ResultResponse = new ResultResponse();
+  async authenticate(req: Request): Promise<ResultResponseModel> {
+    let response: ResultResponseModel = new ResultResponseModel();
 
     const { password } = req.body;
 
