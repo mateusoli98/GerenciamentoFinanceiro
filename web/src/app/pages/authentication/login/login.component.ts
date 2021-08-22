@@ -1,6 +1,6 @@
 import { LoginRequest } from './../../../models/request/authRequest.model';
 import { AuthService } from './../../../services/auth.service';
-import { RoutesEnum } from './../../../enums/routes.unum';
+import { RoutesEnum } from '../../../enums/routes.enum';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -50,8 +50,6 @@ export class LoginComponent implements OnInit {
       } else {
         //mostrar toast de login invalido
       }
-    } else {
-      // mostrar toast de furmulario invalido
     }
   }
 

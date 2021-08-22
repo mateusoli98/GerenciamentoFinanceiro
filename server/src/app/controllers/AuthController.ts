@@ -1,38 +1,21 @@
 import { Request, Response } from "express";
-import { getRepository } from "typeorm";
-import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
-
-import User from "../models/User";
-import { httpStatusCodeEnum } from "../enums/httpStatusCode.enum";
+import { ResultResponse } from "../models/ResultReponse";
+import AuthApp from "../application/AuthApp";
 
 class AuthController {
   async authenticate(req: Request, res: Response) {
-    const repository = getRepository(User);
-    const { email, password } = req.body;
+    let response: ResultResponse = await AuthApp.authenticate(req);
 
-    const user = await repository.findOne({ where: { email } });
+    if (!response.success) {
+      const status = response.statusCode;
 
-    if (!user) {
-      return res.sendStatus(httpStatusCodeEnum.Unauthorized);
+      delete response.statusCode;
+      delete response.success;
+
+      return res.status(status).json(response);
     }
 
-    const isValidPassword = bcrypt.compare(password, user.password);
-
-    if (!isValidPassword) {
-      return res.sendStatus(httpStatusCodeEnum.Unauthorized);
-    }
-
-    const token = jwt.sign({ id: user.id }, process.env.SECRET_OR_PRIVATE_KEY, {
-      expiresIn: "1d",
-    });
-
-    delete user.password;
-
-    return res.json({
-      user,
-      token,
-    });
+    return res.json(response.result);
   }
 }
 

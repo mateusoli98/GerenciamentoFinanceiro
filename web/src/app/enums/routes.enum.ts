@@ -7,3 +7,8 @@ export enum RoutesEnum {
   Planning = 'planning',
   FinacialEducation = 'financial-education',
 }
+
+export enum ServicesRoutesEnum {
+  Login = "login",
+  SignUp = "sign-up",
+}

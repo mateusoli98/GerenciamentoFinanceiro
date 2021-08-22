@@ -21,6 +21,10 @@ export class CreateUserTable1622074004645 implements MigrationInterface {
             isUnique: true,
           },
           {
+            name: "name",
+            type: "varchar",
+          },
+          {
             name: "password",
             type: "varchar",
           },
@@ -30,7 +34,7 @@ export class CreateUserTable1622074004645 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('users');
+    await queryRunner.dropTable("users");
     await queryRunner.query('DROP EXTENSION "uuid-ossp"');
   }
 }

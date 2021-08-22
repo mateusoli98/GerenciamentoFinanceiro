@@ -1,7 +1,7 @@
-import { RoutesEnum } from 'src/app/enums/routes.unum';
+import { RoutesEnum, ServicesRoutesEnum } from 'src/app/enums/routes.enum';
 import { Router } from '@angular/router';
 import {
-  AccountRequest,
+  SignUpRequest,
   LoginRequest,
 } from './../models/request/authRequest.model';
 import { environment } from './../../environments/environment';
@@ -9,6 +9,12 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { LoginResponse } from '../models/response/authResponse.model';
 import jwt_decode from 'jwt-decode';
+import {
+  cleanLocalStorage,
+  getItemLocalStorage,
+  setItemLocalStorage,
+} from '../utils/utils';
+import { LocalStorageEnum } from '../enums/localStorage.enum';
 
 @Injectable({
   providedIn: 'root',
@@ -18,23 +24,29 @@ export class AuthService {
 
   async login(user: LoginRequest) {
     const result: LoginResponse = await this.http
-      .post<LoginResponse>(`${environment.api}/auth`, user)
+      .post<LoginResponse>(
+        `${environment.api}/${ServicesRoutesEnum.Login}`,
+        user
+      )
       .toPromise();
 
     if (result) {
-      window.localStorage.setItem('token', result.token);
+      setItemLocalStorage(LocalStorageEnum.UserToken, result.token);
       return true;
     }
 
     return false;
   }
 
-  async createAccount(user: AccountRequest) {
-    return this.http.post(`${environment.api}/users`, user);
+  async createAccount(user: SignUpRequest) {
+    return this.http.post(
+      `${environment.api}/${ServicesRoutesEnum.SignUp}`,
+      user
+    );
   }
 
   getAuthorizationToken() {
-    const token = window.localStorage.getItem('token');
+    const token = getItemLocalStorage(LocalStorageEnum.UserToken);
     return token;
   }
 
@@ -76,7 +88,7 @@ export class AuthService {
   }
 
   logout() {
-    window.localStorage.removeItem('token');
+    cleanLocalStorage();
     this.router.navigate([RoutesEnum.Login]);
   }
 }

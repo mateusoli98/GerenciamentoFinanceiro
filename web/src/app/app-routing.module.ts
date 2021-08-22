@@ -1,4 +1,4 @@
-import { RoutesEnum } from './enums/routes.unum';
+import { RoutesEnum } from './enums/routes.enum';
 import { AccountComponent } from './pages/authentication/account/account.component';
 import { AppComponent } from './app.component';
 import { AuthGuard } from './guards/auth.guard';
