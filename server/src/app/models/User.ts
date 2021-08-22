@@ -13,7 +13,10 @@ export default class User {
   id: string;
 
   @Column()
-  name: string;
+  firstName: string;
+
+  @Column()
+  lastName: string;
  
   @Column()
   email: string;

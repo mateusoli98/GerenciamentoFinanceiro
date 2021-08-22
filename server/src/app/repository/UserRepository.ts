@@ -10,16 +10,16 @@ class UserRepository implements IUserRepository {
 
     const user = await repository.findOne({ where: { email } });
 
-    if(!user) return null;
+    if (!user) return null;
 
     return user;
   }
 
   async create(req: Request): Promise<User | null> {
     const repository = getRepository(User);
-    const { name, email, password } = req.body;
+    const { firstName, lastName, email, password } = req.body;
 
-    const user = repository.create({ name, email, password });
+    const user = repository.create({ firstName, lastName, email, password });
     await repository.save(user);
 
     return user;

@@ -4,5 +4,6 @@ export interface LoginRequest {
 }
 
 export interface SignUpRequest extends LoginRequest {
-  name: string;
+  firstName: string;
+  lastName?: string;
 }

@@ -28,15 +28,20 @@ export class AccountComponent implements OnInit {
 
   intitForm() {
     this.form = this.fb.group({
-      name: [null, [Validators.minLength(2), Validators.required]],
+      firstName: [null, [Validators.minLength(2), Validators.required]],
+      lastName: [null],
       email: [null, [Validators.email, Validators.required]],
       password: [null, [Validators.minLength(6), Validators.required]],
       confirmPassword: [null, [Validators.minLength(6), Validators.required]],
     });
   }
 
-  get name() {
-    return this.form.get('name')?.value;
+  get firstName() {
+    return this.form.get('firstName')?.value;
+  }
+
+  get lastName() {
+    return this.form.get('lastName')?.value;
   }
 
   get email() {
@@ -71,12 +76,13 @@ export class AccountComponent implements OnInit {
   }
 
   getRequest(): SignUpRequest | null {
-    if (!this.name && !this.email && !this.password) {
+    if (!this.firstName && !this.email && !this.password) {
       return null;
     }
 
     return {
-      name: this.name,
+      firstName: this.firstName,
+      lastName: this.lastName,
       email: this.email,
       password: this.password,
     };
