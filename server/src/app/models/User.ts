@@ -4,8 +4,10 @@ import {
   PrimaryGeneratedColumn,
   BeforeInsert,
   BeforeUpdate,
+  OneToMany,
 } from "typeorm";
 import bcrypt from "bcryptjs";
+import FinancialControl from "./FinancialControl";
 
 @Entity("users")
 export default class User {
@@ -17,13 +19,16 @@ export default class User {
 
   @Column()
   lastName: string;
- 
+
   @Column()
   email: string;
 
   @Column()
   password: string;
-  
+
+  @OneToMany(() => FinancialControl, (user) => User)
+  financialControls: Array<FinancialControl>;
+
   @BeforeInsert()
   @BeforeUpdate()
   hashPassword() {
