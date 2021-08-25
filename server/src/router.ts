@@ -17,5 +17,10 @@ router.post(
   authMiddleware,
   FinancialControlController.create
 );
+router.get(
+  RoutesEnum.FinancialControl,
+  authMiddleware,
+  FinancialControlController.getByUser
+);
 
 export default router;

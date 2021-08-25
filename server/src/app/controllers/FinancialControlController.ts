@@ -9,6 +9,12 @@ class FinancialControlController {
 
     return ResultResponse.result(result, res);
   }
+
+  async getByUser(req: Request, res: Response){
+    let result: ResultResponseModel = await FinancialControlApp.getByUser(req);
+
+    return ResultResponse.result(result, res);
+  }
 }
 
 export default new FinancialControlController();

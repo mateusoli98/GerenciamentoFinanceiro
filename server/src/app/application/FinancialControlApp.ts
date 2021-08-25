@@ -51,6 +51,42 @@ class UserApp implements IFinancialControlApp {
     return response;
   }
 
+  async getByUser(req: Request): Promise<ResultResponseModel> {
+    let response: ResultResponseModel = new ResultResponseModel();
+
+    const user = await UserRepository.findId(req);
+
+    if (!user) {
+      response.success = false;
+      response.statusCode = httpStatusCodeEnum.InternalServerError;
+      response.errors.push({
+        message: "Erro interno no servidor",
+      });
+
+      return response;
+    }
+
+    const financialControls: Array<FinancialControl> =
+      await FinancialControlRepository.getByUser(user);
+
+    if (!financialControls) {
+      response.success = false;
+      response.statusCode = httpStatusCodeEnum.InternalServerError;
+      response.errors.push({
+        message: "Erro interno no servidor",
+      });
+
+      return response;
+    }
+
+    financialControls.forEach((f) => delete f.user);
+
+    response.success = true;
+    response.result = financialControls;
+
+    return response;
+  }
+
   validateRequest(req: Request) {
     let response: ResultResponseModel = new ResultResponseModel();
     response.success = true;

@@ -21,6 +21,18 @@ class FinancialControlRepository implements IFinancialControlRepository {
 
     return financialControl;
   }
+
+  async getByUser(
+    user: User
+  ): Promise<Array<FinancialControl> | null> {
+    const repository = getRepository(FinancialControl);
+
+    const financialControls: Array<FinancialControl> = await repository.find({
+      where: { user },
+    });
+
+    return financialControls;
+  }
 }
 
 export default new FinancialControlRepository();
