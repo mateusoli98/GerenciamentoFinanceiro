@@ -22,5 +22,10 @@ router.get(
   authMiddleware,
   FinancialControlController.getByUser
 );
+router.delete(
+  RoutesEnum.FinancialControl,
+  authMiddleware,
+  FinancialControlController.deleteFinancialControl
+);
 
 export default router;

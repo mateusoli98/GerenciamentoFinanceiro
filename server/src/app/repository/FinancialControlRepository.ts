@@ -1,5 +1,5 @@
 import { Request } from "express";
-import { getRepository } from "typeorm";
+import { DeleteResult, getRepository } from "typeorm";
 import FinancialControl from "../models/FinancialControl";
 import User from "../models/User";
 import { IFinancialControlRepository } from "./repositoryInterfaces/IFinancialControlRepository";
@@ -22,9 +22,7 @@ class FinancialControlRepository implements IFinancialControlRepository {
     return financialControl;
   }
 
-  async getByUser(
-    user: User
-  ): Promise<Array<FinancialControl> | null> {
+  async getByUser(user: User): Promise<Array<FinancialControl> | null> {
     const repository = getRepository(FinancialControl);
 
     const financialControls: Array<FinancialControl> = await repository.find({
@@ -32,6 +30,32 @@ class FinancialControlRepository implements IFinancialControlRepository {
     });
 
     return financialControls;
+  }
+
+  async find(req: Request): Promise<FinancialControl | null> {
+    const repository = getRepository(FinancialControl);
+
+    const { id } = req.query;
+
+    const result: FinancialControl = await repository.findOne({
+      where: { id },
+    });
+
+    return result;
+  }
+
+  async deleteFinancialControl(
+    financialControl: FinancialControl
+  ): Promise<boolean> {
+    const repository = getRepository(FinancialControl);
+
+    const result: DeleteResult = await repository.delete(financialControl);
+
+    if (result.raw) {
+      return true;
+    }
+
+    return false;
   }
 }
 

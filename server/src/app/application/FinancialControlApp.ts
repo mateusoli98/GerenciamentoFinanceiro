@@ -87,6 +87,40 @@ class UserApp implements IFinancialControlApp {
     return response;
   }
 
+  async deleteFinancialControl(req: Request): Promise<ResultResponseModel> {
+    let response: ResultResponseModel = new ResultResponseModel();
+
+    const financialControl: FinancialControl =
+      await FinancialControlRepository.find(req);
+
+    if (!financialControl) {
+      response.success = false;
+      response.statusCode = httpStatusCodeEnum.InternalServerError;
+      response.errors.push({
+        message: "Erro interno no servidor",
+      });
+
+      return response;
+    }
+
+    const result: boolean =
+      await FinancialControlRepository.deleteFinancialControl(financialControl);
+
+    if (result) {
+      response.success = true;
+      response.result = {
+        message: "Operação realizada com sucesso!",
+      };
+    } else {
+      response.success = false;
+      response.result = {
+        message: "Erro interno no servidor!",
+      };
+    }
+
+    return response;
+  }
+
   validateRequest(req: Request) {
     let response: ResultResponseModel = new ResultResponseModel();
     response.success = true;

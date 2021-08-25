@@ -15,6 +15,12 @@ class FinancialControlController {
 
     return ResultResponse.result(result, res);
   }
+
+  async deleteFinancialControl(req: Request, res: Response){
+    let result: ResultResponseModel = await FinancialControlApp.deleteFinancialControl(req);
+
+    return ResultResponse.result(result, res);
+  }
 }
 
 export default new FinancialControlController();
