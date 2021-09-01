@@ -16,8 +16,20 @@ class FinancialControlController {
     return ResultResponse.result(result, res);
   }
 
+  async getChartCurrentMonth(req: Request, res: Response){
+    let result: ResultResponseModel = await FinancialControlApp.getChartCurrentMonth(req);
+
+    return ResultResponse.result(result, res);
+  }
+
   async deleteFinancialControl(req: Request, res: Response){
     let result: ResultResponseModel = await FinancialControlApp.deleteFinancialControl(req);
+
+    return ResultResponse.result(result, res);
+  }
+
+  async updateFinancialControl(req: Request, res: Response){
+    let result: ResultResponseModel = await FinancialControlApp.updateFinancialControl(req);
 
     return ResultResponse.result(result, res);
   }

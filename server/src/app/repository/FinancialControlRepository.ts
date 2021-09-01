@@ -1,5 +1,5 @@
 import { Request } from "express";
-import { DeleteResult, getRepository } from "typeorm";
+import { Between, getRepository } from "typeorm";
 import FinancialControl from "../models/FinancialControl";
 import User from "../models/User";
 import { IFinancialControlRepository } from "./repositoryInterfaces/IFinancialControlRepository";
@@ -32,13 +32,31 @@ class FinancialControlRepository implements IFinancialControlRepository {
     return financialControls;
   }
 
-  async find(req: Request): Promise<FinancialControl | null> {
+  async getCurrentMonth(
+    user: User,
+    initialDate: string,
+    finalDate: string
+  ): Promise<Array<FinancialControl> | null> {
     const repository = getRepository(FinancialControl);
 
-    const { id } = req.query;
+    const financialControls: Array<FinancialControl> = await repository.find({
+      where: {
+        user,
+        created_at: Between(initialDate, finalDate),
+      },
+      order: {
+        created_at: "ASC",
+      },
+    });
+
+    return financialControls;
+  }
+
+  async find(financialControlGuid: string): Promise<FinancialControl | null> {
+    const repository = getRepository(FinancialControl);
 
     const result: FinancialControl = await repository.findOne({
-      where: { id },
+      where: { financialControlGuid },
     });
 
     return result;
@@ -49,13 +67,35 @@ class FinancialControlRepository implements IFinancialControlRepository {
   ): Promise<boolean> {
     const repository = getRepository(FinancialControl);
 
-    const result: DeleteResult = await repository.delete(financialControl);
+    const result: FinancialControl = await repository.remove(financialControl);
 
-    if (result.raw) {
+    if (result) {
       return true;
     }
 
     return false;
+  }
+
+  async updateFinancialControl(
+    financialControlBefore: FinancialControl,
+    financialControlAfter: FinancialControl
+  ): Promise<FinancialControl | null> {
+    const repository = getRepository(FinancialControl);
+
+    const financialControlUpdated: FinancialControl = await repository.merge(
+      financialControlBefore,
+      financialControlAfter
+    );
+
+    const result: FinancialControl = await repository.save(
+      financialControlUpdated
+    );
+
+    if (result) {
+      return result;
+    }
+
+    return null;
   }
 }
 

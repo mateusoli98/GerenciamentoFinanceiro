@@ -1,10 +1,17 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from "typeorm";
 import User from "./User";
 
 @Entity("financialControl")
 export default class FinancialControl {
   @PrimaryGeneratedColumn("uuid")
-  id: number;
+  financialControlGuid: string;
 
   @Column()
   name: string;
@@ -20,4 +27,10 @@ export default class FinancialControl {
 
   @ManyToOne(() => User, (financialControls) => FinancialControl)
   user: User;
+
+  @CreateDateColumn()
+  public created_at: Date;
+
+  @UpdateDateColumn()
+  public updated_at: Date;
 }

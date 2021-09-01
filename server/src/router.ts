@@ -22,10 +22,20 @@ router.get(
   authMiddleware,
   FinancialControlController.getByUser
 );
+router.get(
+  RoutesEnum.FinancialControlChartCurrentMonth,
+  authMiddleware,
+  FinancialControlController.getChartCurrentMonth
+);
 router.delete(
   RoutesEnum.FinancialControl,
   authMiddleware,
   FinancialControlController.deleteFinancialControl
+);
+router.put(
+  RoutesEnum.FinancialControl,
+  authMiddleware,
+  FinancialControlController.updateFinancialControl
 );
 
 export default router;
