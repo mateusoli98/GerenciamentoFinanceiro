@@ -8,6 +8,7 @@ import {
 } from "typeorm";
 import bcrypt from "bcryptjs";
 import FinancialControl from "./FinancialControl";
+import Objective from "./Objectives";
 
 @Entity("users")
 export default class User {
@@ -28,6 +29,9 @@ export default class User {
 
   @OneToMany(() => FinancialControl, (user) => User)
   financialControls: Array<FinancialControl>;
+
+  @OneToMany(() => Objective, (user) => User)
+  objectives: Array<Objective>;
 
   @BeforeInsert()
   @BeforeUpdate()
