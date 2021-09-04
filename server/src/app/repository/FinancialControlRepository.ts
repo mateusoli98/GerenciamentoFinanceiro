@@ -27,16 +27,13 @@ class FinancialControlRepository implements IFinancialControlRepository {
 
     const financialControls: Array<FinancialControl> = await repository.find({
       where: { user },
+      order: { name: "ASC" },
     });
 
     return financialControls;
   }
 
-  async getCurrentMonth(
-    user: User,
-    initialDate: string,
-    finalDate: string
-  ): Promise<Array<FinancialControl> | null> {
+  async getCurrentMonth(user: User, initialDate: string, finalDate: string): Promise<Array<FinancialControl> | null> {
     const repository = getRepository(FinancialControl);
 
     const financialControls: Array<FinancialControl> = await repository.find({
@@ -62,9 +59,7 @@ class FinancialControlRepository implements IFinancialControlRepository {
     return result;
   }
 
-  async deleteFinancialControl(
-    financialControl: FinancialControl
-  ): Promise<boolean> {
+  async deleteFinancialControl(financialControl: FinancialControl): Promise<boolean> {
     const repository = getRepository(FinancialControl);
 
     const result: FinancialControl = await repository.remove(financialControl);
@@ -76,20 +71,12 @@ class FinancialControlRepository implements IFinancialControlRepository {
     return false;
   }
 
-  async updateFinancialControl(
-    financialControlBefore: FinancialControl,
-    financialControlAfter: FinancialControl
-  ): Promise<FinancialControl | null> {
+  async updateFinancialControl(financialControlBefore: FinancialControl, financialControlAfter: FinancialControl): Promise<FinancialControl | null> {
     const repository = getRepository(FinancialControl);
 
-    const financialControlUpdated: FinancialControl = await repository.merge(
-      financialControlBefore,
-      financialControlAfter
-    );
+    const financialControlUpdated: FinancialControl = await repository.merge(financialControlBefore, financialControlAfter);
 
-    const result: FinancialControl = await repository.save(
-      financialControlUpdated
-    );
+    const result: FinancialControl = await repository.save(financialControlUpdated);
 
     if (result) {
       return result;

@@ -31,8 +31,7 @@ class UserApp implements IFinancialControlApp {
       return response;
     }
 
-    const financialControl: FinancialControl =
-      await FinancialControlRepository.create(req, user);
+    const financialControl: FinancialControl = await FinancialControlRepository.create(req, user);
 
     if (!financialControl) {
       response.success = false;
@@ -67,8 +66,7 @@ class UserApp implements IFinancialControlApp {
       return response;
     }
 
-    const financialControls: Array<FinancialControl> =
-      await FinancialControlRepository.getByUser(user);
+    const financialControls: Array<FinancialControl> = await FinancialControlRepository.getByUser(user);
 
     if (!financialControls) {
       response.success = false;
@@ -105,24 +103,19 @@ class UserApp implements IFinancialControlApp {
 
     const { currentDate } = req.query;
 
-    const isValidateCurrentMonth = this.validateCurrentMonth(
-      currentDate as string
-    );
+    const isValidateCurrentMonth = this.validateCurrentMonth(currentDate as string);
 
     if (!isValidateCurrentMonth) {
       return isValidateCurrentMonth;
     }
 
-    const { firstDay, lastDay } = this.getFirstAndLastDayMonth(
-      new Date(currentDate as any)
-    );
+    const { firstDay, lastDay } = this.getFirstAndLastDayMonth(new Date(currentDate as any));
 
-    const financialControls: Array<FinancialControl> =
-      await FinancialControlRepository.getCurrentMonth(
-        user,
-        firstDay.toISOString(),
-        lastDay.toISOString()
-      );
+    const financialControls: Array<FinancialControl> = await FinancialControlRepository.getCurrentMonth(
+      user,
+      firstDay.toISOString(),
+      lastDay.toISOString()
+    );
 
     if (!financialControls) {
       response.success = false;
@@ -145,8 +138,7 @@ class UserApp implements IFinancialControlApp {
 
     const { financialControlGuid } = req.query;
 
-    const financialControl: FinancialControl =
-      await FinancialControlRepository.find(financialControlGuid as string);
+    const financialControl: FinancialControl = await FinancialControlRepository.find(financialControlGuid as string);
 
     if (!financialControl) {
       response.success = false;
@@ -158,8 +150,7 @@ class UserApp implements IFinancialControlApp {
       return response;
     }
 
-    const result: boolean =
-      await FinancialControlRepository.deleteFinancialControl(financialControl);
+    const result: boolean = await FinancialControlRepository.deleteFinancialControl(financialControl);
 
     if (result) {
       response.success = true;
@@ -182,7 +173,7 @@ class UserApp implements IFinancialControlApp {
 
     let validateRequest: ResultResponseModel = new ResultResponseModel();
 
-    validateRequest = this.validateRequest(req);
+    validateRequest = this.validateRequest(req, true);
 
     if (!validateRequest.success) {
       return validateRequest;
@@ -190,8 +181,7 @@ class UserApp implements IFinancialControlApp {
 
     const { financialControlGuid } = req.body;
 
-    const financialControlBefore: FinancialControl =
-      await FinancialControlRepository.find(financialControlGuid);
+    const financialControlBefore: FinancialControl = await FinancialControlRepository.find(financialControlGuid);
 
     if (!financialControlBefore) {
       response.success = false;
@@ -205,10 +195,7 @@ class UserApp implements IFinancialControlApp {
 
     const financialControlAfter: FinancialControl = req.body;
 
-    const result = await FinancialControlRepository.updateFinancialControl(
-      financialControlBefore,
-      financialControlAfter
-    );
+    const result = await FinancialControlRepository.updateFinancialControl(financialControlBefore, financialControlAfter);
 
     if (!result) {
       response.success = false;
@@ -231,11 +218,7 @@ class UserApp implements IFinancialControlApp {
     const { name, income, value, financialControlGuid } = req.body;
 
     if (isUpdated) {
-      if (
-        isEmpty(financialControlGuid) ||
-        isNull(financialControlGuid) ||
-        isUndefined(financialControlGuid)
-      ) {
+      if (isEmpty(financialControlGuid) || isNull(financialControlGuid) || isUndefined(financialControlGuid)) {
         response.success = false;
         response.errors.push({
           message: "Receita/despesa invalida",
@@ -309,16 +292,8 @@ class UserApp implements IFinancialControlApp {
   }
 
   getFirstAndLastDayMonth(currentDate: Date) {
-    var firstDay = new Date(
-      currentDate.getFullYear(),
-      currentDate.getMonth(),
-      1
-    );
-    var lastDay = new Date(
-      currentDate.getFullYear(),
-      currentDate.getMonth() + 1,
-      0
-    );
+    var firstDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+    var lastDay = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
 
     return {
       firstDay,

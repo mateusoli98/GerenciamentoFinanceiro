@@ -26,7 +26,7 @@ export class CreateFinancialControl1629659620558 implements MigrationInterface {
             type: "decimal",
           },
           {
-            name: "password",
+            name: "income",
             type: "bool",
           },
           {
