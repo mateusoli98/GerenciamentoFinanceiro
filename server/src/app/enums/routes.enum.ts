@@ -4,4 +4,5 @@ export enum RoutesEnum {
   FinancialControl = "/financial-control",
   FinancialControlChartCurrentMonth = "/financial-control-chart-current-month",
   Objective = "/objective",
+  Planning = "/planning",
 }

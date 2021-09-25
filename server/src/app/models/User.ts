@@ -1,14 +1,9 @@
-import {
-  Column,
-  Entity,
-  PrimaryGeneratedColumn,
-  BeforeInsert,
-  BeforeUpdate,
-  OneToMany,
-} from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn, BeforeInsert, BeforeUpdate, OneToMany } from "typeorm";
 import bcrypt from "bcryptjs";
 import FinancialControl from "./FinancialControl";
 import Objective from "./Objectives";
+import Member from "./Member";
+import Planning from "./Planning";
 
 @Entity("users")
 export default class User {
@@ -32,6 +27,12 @@ export default class User {
 
   @OneToMany(() => Objective, (user) => User)
   objectives: Array<Objective>;
+
+  @OneToMany(() => Member, (user) => User)
+  members: Array<Member>;
+
+  @OneToMany(() => Planning, (user) => User)
+  plannings: Array<Planning>;
 
   @BeforeInsert()
   @BeforeUpdate()

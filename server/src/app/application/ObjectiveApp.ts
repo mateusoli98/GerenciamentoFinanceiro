@@ -18,7 +18,7 @@ class UserApp implements IObjectiveApp {
       return validateRequest;
     }
 
-    const user = await UserRepository.findId(req);
+    const user = await UserRepository.findRequestId(req);
 
     if (!user) {
       response.success = false;
@@ -53,7 +53,7 @@ class UserApp implements IObjectiveApp {
   async getByUser(req: Request): Promise<ResultResponseModel> {
     let response: ResultResponseModel = new ResultResponseModel();
 
-    const user = await UserRepository.findId(req);
+    const user = await UserRepository.findRequestId(req);
 
     if (!user) {
       response.success = false;

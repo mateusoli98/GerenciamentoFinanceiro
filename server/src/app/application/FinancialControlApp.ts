@@ -19,7 +19,7 @@ class UserApp implements IFinancialControlApp {
       return validateRequest;
     }
 
-    const user = await UserRepository.findId(req);
+    const user = await UserRepository.findRequestId(req);
 
     if (!user) {
       response.success = false;
@@ -54,7 +54,7 @@ class UserApp implements IFinancialControlApp {
   async getByUser(req: Request): Promise<ResultResponseModel> {
     let response: ResultResponseModel = new ResultResponseModel();
 
-    const user = await UserRepository.findId(req);
+    const user = await UserRepository.findRequestId(req);
 
     if (!user) {
       response.success = false;
@@ -89,7 +89,7 @@ class UserApp implements IFinancialControlApp {
   async getChartCurrentMonth(req: Request): Promise<ResultResponseModel> {
     let response: ResultResponseModel = new ResultResponseModel();
 
-    const user = await UserRepository.findId(req);
+    const user = await UserRepository.findRequestId(req);
 
     if (!user) {
       response.success = false;
