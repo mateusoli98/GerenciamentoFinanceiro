@@ -22,12 +22,28 @@ class FinancialControlRepository implements IFinancialControlRepository {
     return financialControl;
   }
 
-  async getByUser(user: User): Promise<Array<FinancialControl> | null> {
+  async getByUser(user: User, initialDate: string, finalDate: string): Promise<Array<FinancialControl> | null> {
     const repository = getRepository(FinancialControl);
 
     const financialControls: Array<FinancialControl> = await repository.find({
-      where: { user },
-      order: { name: "ASC" },
+      where: {
+        user,
+        created_at: Between(initialDate, finalDate),
+      },
+      order: { created_at: "DESC" },
+    });
+
+    return financialControls;
+  }
+
+  async getAll(user: User, initialDate: string, finalDate: string): Promise<Array<FinancialControl> | null> {
+    const repository = getRepository(FinancialControl);
+
+    const financialControls: Array<FinancialControl> = await repository.find({
+      where: {
+        user,
+        created_at: Between(initialDate, finalDate),
+      },
     });
 
     return financialControls;

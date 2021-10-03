@@ -53,6 +53,7 @@ import { LoginComponent } from './pages/authentication/login/login.component';
 import { HomeComponent } from './pages/home/home.component';
 import { AccountComponent } from './pages/authentication/account/account.component';
 import { HttpClientModule } from '@angular/common/http';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { httpInterceptorProviders } from './http-interceptors';
 
@@ -108,7 +109,8 @@ import { httpInterceptorProviders } from './http-interceptors';
     MatSelectModule,
     MatAutocompleteModule,
     MatChipsModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatTooltipModule,
   ],
   providers: [
     httpInterceptorProviders,

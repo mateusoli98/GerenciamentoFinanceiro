@@ -9,6 +9,11 @@ export enum RoutesEnum {
 }
 
 export enum ServicesRoutesEnum {
-  Login = "login",
-  SignUp = "sign-up",
+  Login = 'login',
+  SignUp = 'sign-up',
+  FinancialControl = 'financial-control',
+  FinancialControlChartCurrentMonth = 'financial-control-chart-current-month',
+  FinancialControlBalance = 'financial-control-balance',
+  Objective = 'objective',
+  Planning = 'planning',
 }

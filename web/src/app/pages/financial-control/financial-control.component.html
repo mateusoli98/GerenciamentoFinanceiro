@@ -3,25 +3,33 @@
   <mat-card class="m-1 flex-grow-1">
     <div class="content">
       <span>Saldo</span>
-      <b><span>R$ </span>33.268,02</b>
+      <b><span>R$ </span>{{ getFormatCurrency(balance.total) }}</b>
     </div>
     <mat-icon color="primary">attach_money</mat-icon>
   </mat-card>
   <mat-card class="m-1 flex-grow-1">
     <div class="content">
       <span>Receitas</span>
-      <b><span>R$ </span>12.523,02</b>
+      <b><span>R$ </span>{{ getFormatCurrency(balance.totalRevenue) }}</b>
     </div>
-    <div class="icon-dialog" (click)="openDialog(true)">
+    <div
+      class="icon-dialog"
+      (click)="openDialog(true)"
+      matTooltip="Adicionar receita"
+    >
       <mat-icon style="color: #0bcc0b">add</mat-icon>
     </div>
   </mat-card>
   <mat-card class="m-1 flex-grow-1">
     <div class="content">
       <span>Despesas</span>
-      <b><span>R$ </span>4.896,52</b>
+      <b><span>R$ </span>{{ getFormatCurrency(balance.totalOutgoing) }}</b>
     </div>
-    <div class="icon-dialog" (click)="openDialog(false)">
+    <div
+      class="icon-dialog"
+      (click)="openDialog(false)"
+      matTooltip="Adicionar despesa"
+    >
       <mat-icon color="warn">remove</mat-icon>
     </div>
   </mat-card>
@@ -29,9 +37,11 @@
 
 <div class="d-flex">
   <mat-card class="m-1 flex-grow-1">
-    <app-line-chart></app-line-chart>
+    <div *ngIf="chartOptions">
+      <app-line-chart [chartOptions]="chartOptions"></app-line-chart>
+    </div>
   </mat-card>
-  <mat-card class="m-1 card-custom">
+  <mat-card class="m-1 card-custom overflow-content">
     <table mat-table [dataSource]="dataSource">
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef>Nome</th>
@@ -46,10 +56,31 @@
       <ng-container matColumnDef="indicator">
         <th mat-header-cell *matHeaderCellDef>Indicador</th>
         <td mat-cell *matCellDef="let element">
-          <mat-icon *ngIf="element.isIncome" style="color: #0bcc0b">
+          <mat-icon *ngIf="element.income" style="color: #0bcc0b">
             add
           </mat-icon>
-          <mat-icon *ngIf="!element.isIncome" color="warn">remove</mat-icon>
+          <mat-icon *ngIf="!element.income" color="warn">remove</mat-icon>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef>Ação</th>
+        <td mat-cell *matCellDef="let element">
+          <mat-icon
+            style="cursor: pointer"
+            (click)="
+              deleteFinancialControl(
+                element.financialControlGuid,
+                element.income
+              )
+            "
+            >delete</mat-icon
+          >
+          <mat-icon
+            style="cursor: pointer"
+            (click)="editFinancialControl(element)"
+            >create</mat-icon
+          >
         </td>
       </ng-container>
 

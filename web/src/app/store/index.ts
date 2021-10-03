@@ -1,3 +1,6 @@
-import { DrawerReducer } from '../reducers';
+import { DrawerReducer, FinancialControlReducer } from '../reducers';
 
-export const store = { DrawerReducer };
+export const store = {
+  DrawerReducer,
+  FinancialControlReducer,
+};

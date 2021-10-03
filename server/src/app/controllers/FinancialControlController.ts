@@ -22,6 +22,12 @@ class FinancialControlController {
     return ResultResponse.result(result, res);
   }
 
+  async getBalance(req: Request, res: Response) {
+    let result: ResultResponseModel = await FinancialControlApp.getBalance(req);
+
+    return ResultResponse.result(result, res);
+  }
+
   async deleteFinancialControl(req: Request, res: Response) {
     let result: ResultResponseModel = await FinancialControlApp.deleteFinancialControl(req);
 

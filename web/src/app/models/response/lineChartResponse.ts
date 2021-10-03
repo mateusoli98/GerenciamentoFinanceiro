@@ -10,8 +10,10 @@ export interface TitleChartResponse {
 }
 
 export interface ChartResponse {
-  height: number;
-  type: "line" | "area" | "bar" | "histogram" | "pie" | "donut" | "radialBar" | "scatter" | "bubble" | "heatmap" | "candlestick" | "boxPlot" | "radar" | "polarArea" | "rangeBar" | "treemap";
+
+    height: number,
+    type: "line" | "area" | "bar" | "histogram" | "pie" | "donut" | "radialBar" | "scatter" | "bubble" | "heatmap" | "candlestick" | "boxPlot" | "radar" | "polarArea" | "rangeBar" | "treemap",
+  
 }
 
 export interface XAxisResponse {

@@ -17,6 +17,7 @@ router.post(RoutesEnum.Login, AuthController.authenticate);
 router.post(RoutesEnum.FinancialControl, authMiddleware, FinancialControlController.create);
 router.get(RoutesEnum.FinancialControl, authMiddleware, FinancialControlController.getByUser);
 router.get(RoutesEnum.FinancialControlChartCurrentMonth, authMiddleware, FinancialControlController.getChartCurrentMonth);
+router.get(RoutesEnum.FinancialControlBalance, authMiddleware, FinancialControlController.getBalance);
 router.delete(RoutesEnum.FinancialControl, authMiddleware, FinancialControlController.deleteFinancialControl);
 router.put(RoutesEnum.FinancialControl, authMiddleware, FinancialControlController.updateFinancialControl);
 

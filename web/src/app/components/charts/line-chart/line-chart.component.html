@@ -1,7 +1,8 @@
-<apx-chart
-  [series]="chartOptions.series"
-  [chart]="chartOptions.chart"
-  [xaxis]="chartOptions.xaxis"
-  [title]="chartOptions.title"
-></apx-chart>
-
+<div *ngIf="chartOptions">
+  <apx-chart
+    [series]="chartOptions.series"
+    [chart]="chartOptions.chart"
+    [xaxis]="chartOptions.xaxis"
+    [title]="chartOptions.title"
+  ></apx-chart>
+</div>
