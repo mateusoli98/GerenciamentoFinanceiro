@@ -2,8 +2,8 @@
 
 <app-search-header (newItemEvent)="openDialog($event)"></app-search-header>
 
-<div class="mt-1 d-flex flex-wrap">
+<div class="mt-1 d-flex flex-wrap" *ngIf="listDataObjetctives">
   <div class="m-1 cards-custom" *ngFor="let data of listDataObjetctives">
-    <app-card-objective [data]="data"></app-card-objective>
+    <app-card-objective [data]="data" (updateData)="reloadScreen($event)"></app-card-objective>
   </div>
 </div>

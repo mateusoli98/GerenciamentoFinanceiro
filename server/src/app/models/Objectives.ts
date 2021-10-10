@@ -1,11 +1,4 @@
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  ManyToOne,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from "typeorm";
+import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import User from "./User";
 
 @Entity("objective")
@@ -36,4 +29,6 @@ export default class Objective {
 
   @UpdateDateColumn()
   public updated_at: Date;
+
+  valueMonth?: number;
 }

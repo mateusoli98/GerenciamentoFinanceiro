@@ -77,7 +77,17 @@ class UserApp implements IObjectiveApp {
       return response;
     }
 
-    objectives.forEach((obj) => delete obj.user);
+    objectives.forEach((obj) => {
+      delete obj.user;
+
+      const { totalValue, dateFinal, entryValue } = obj;
+      const currentDate = new Date();
+      const newDateFinal = new Date(dateFinal);
+
+      const amountMonths = (newDateFinal.getFullYear() - currentDate.getFullYear()) * 12 + (newDateFinal.getMonth() - currentDate.getMonth());
+
+      obj.valueMonth = amountMonths > 0 ? (Number(totalValue) - Number(entryValue)) / amountMonths : 0;
+    });
 
     response.success = true;
     response.result = objectives;

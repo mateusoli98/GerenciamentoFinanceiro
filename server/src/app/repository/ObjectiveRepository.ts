@@ -1,7 +1,7 @@
 import { Request } from "express";
 import Objective from "../models/Objectives";
 import User from "../models/User";
-import { getRepository } from "typeorm";
+import { Between, getRepository } from "typeorm";
 
 import { IObjectiveRepository } from "./repositoryInterfaces/IObjectiveRepository";
 
@@ -29,7 +29,7 @@ class ObjectiveRepository implements IObjectiveRepository {
     const repository = getRepository(Objective);
 
     const objectives: Array<Objective> = await repository.find({
-      where: { user },
+      where: { user, dateFinal: Between(new Date(), new Date(2100, 0, 1)) },
       order: { name: "ASC" },
     });
 
@@ -72,3 +72,9 @@ class ObjectiveRepository implements IObjectiveRepository {
 }
 
 export default new ObjectiveRepository();
+function addYears(
+  arg0: Date,
+  addYears: any
+): any | import("typeorm").FindConditions<Date> | import("typeorm").FindOperator<import("typeorm").FindConditions<Date>> {
+  throw new Error("Function not implemented.");
+}

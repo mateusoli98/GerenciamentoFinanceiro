@@ -1,6 +1,11 @@
-import { DrawerReducer, FinancialControlReducer } from '../reducers';
+import {
+  DrawerReducer,
+  FinancialControlReducer,
+  ObjectiveReducer,
+} from '../reducers';
 
 export const store = {
   DrawerReducer,
   FinancialControlReducer,
+  ObjectiveReducer,
 };

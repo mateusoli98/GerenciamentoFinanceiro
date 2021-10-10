@@ -1,18 +1,24 @@
-<mat-card class="example-card">
+<mat-card class="example-card" *ngIf="data">
   <mat-card-header>
-    <mat-card-title>{{data.name}} - {{data.price}}</mat-card-title>
+    <mat-card-title>{{ data.name }} - R$ {{ data.totalValue }}</mat-card-title>
     <mat-card-subtitle class="d-flex flex-direction-column">
-      <span>Acaba em: {{data.date}} </span>
-      <span>Economize: {{data.priceMonth}} / mês</span>
+      <span>Acaba em: {{ dateFinalFormater }} </span>
+      <span>Economize: R$ {{ data.valueMonth }} / mês</span>
     </mat-card-subtitle>
   </mat-card-header>
-  <mat-card-content >
-    <app-radial-chart [percentage]="data.percentage" [label]="data.priceActual"></app-radial-chart>
+  <mat-card-content>
+    <app-radial-chart
+      [percentage]="percentage"
+      [label]="priceActual"
+    ></app-radial-chart>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-stroked-button color="primary">
+    <button mat-stroked-button color="primary" (click)="updateObjective()">
       <mat-icon>add</mat-icon>
       Nova entrada
+    </button>
+    <button mat-stroked-button color="warn" (click)="deleteObjective()">
+      <mat-icon>delete</mat-icon>
     </button>
   </mat-card-actions>
 </mat-card>
