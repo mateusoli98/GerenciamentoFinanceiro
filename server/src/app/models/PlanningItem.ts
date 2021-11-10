@@ -10,7 +10,10 @@ export default class PlanningItem {
   name: string;
 
   @Column()
-  value: number;
+  totalValue: number;
+
+  @Column()
+  entryValue: number;
   
   @Column()
   category: number;

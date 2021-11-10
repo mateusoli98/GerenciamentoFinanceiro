@@ -1,13 +1,9 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import {
-  MatAutocomplete,
-  MatAutocompleteSelectedEvent,
-} from '@angular/material/autocomplete';
-import { MatChipInputEvent } from '@angular/material/chips';
-import { Observable } from 'rxjs';
-import {COMMA, ENTER} from '@angular/cdk/keycodes';
-import {map, startWith} from 'rxjs/operators';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
+import { PlanningRequest } from 'src/app/models/request/planningRequest.model';
+import { PlanningService } from 'src/app/services/planning.service';
+import { SnackbarService } from 'src/app/services/snackbar.service';
 
 @Component({
   selector: 'app-dialog-planning',
@@ -15,79 +11,81 @@ import {map, startWith} from 'rxjs/operators';
   styleUrls: ['./dialog-planning.component.scss'],
 })
 export class DialogPlanningComponent implements OnInit {
-  public showForm: boolean = false;
-  public isGroup: boolean = false;
+  public form: FormGroup = new FormGroup({});
 
-  visible = true;
-  selectable = true;
-  removable = true;
-  separatorKeysCodes: number[] = [ENTER, COMMA];
-  fruitCtrl = new FormControl();
-  filteredFruits: Observable<string[]>;
-  fruits: string[] = ['João'];
-  allFruits: string[] = ['João', 'Maria', 'José', 'Arnaldo'];
-
-  @ViewChild('fruitInput') fruitInput: ElementRef<HTMLInputElement> | any;
-  @ViewChild('auto') matAutocomplete: MatAutocomplete | any;
-
-  constructor() {
-    this.filteredFruits = this.fruitCtrl.valueChanges.pipe(
-      startWith(null),
-      map((fruit: string | null) =>
-        fruit ? this._filter(fruit) : this.allFruits.slice()
-      )
-    );
-  }
+  constructor(
+    private fb: FormBuilder,
+    private planningService: PlanningService,
+    private snackbarService: SnackbarService,
+    public dialogRef: MatDialogRef<DialogPlanningComponent>
+  ) {}
 
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+    this.intitForm();
   }
 
-  add(event: MatChipInputEvent): void {
-    const input = event.input;
-    const value = event.value;
+  intitForm() {
+    this.form = this.fb.group({
+      name: [null, [Validators.required]],
+      initialValue: [null, [Validators.required, Validators.min(0)]],
+      dateFinal: [null, [Validators.required]],
+    });
+  }
 
-    // Add our fruit
-    if ((value || '').trim()) {
-      this.fruits.push(value.trim());
+  get name() {
+    return this.form.get('name')?.value;
+  }
+
+  get initialValue() {
+    return this.form.get('initialValue')?.value;
+  }
+
+  get dateFinal() {
+    return this.form.get('dateFinal')?.value;
+  }
+
+  async savePlanning() {
+    const request = this.getPlanningRequest();
+
+    if (request) {
+      await (
+        await this.planningService.create(request)
+      ).subscribe((result) => {
+        if (result) {
+          this.snackbarService.showMessage('Planejamento criado com sucesso');
+          this.dialogRef.close();
+        } else {
+          this.snackbarService.showMessage(
+            'Não foi possível criar o planejamento'
+          );
+          this.dialogRef.close();
+        }
+      });
     }
+  }
 
-    // Reset the input value
-    if (input) {
-      input.value = '';
+  getPlanningRequest(): PlanningRequest | undefined {
+    if (this.form.invalid) return undefined;
+
+    if (!this.name || !this.initialValue) return undefined;
+
+    const valueDateFinal = new Date(this.dateFinal);
+    const currentDate = new Date();
+
+    if (
+      valueDateFinal.getFullYear() < currentDate.getFullYear() ||
+      valueDateFinal.getMonth() < currentDate.getMonth() ||
+      valueDateFinal.getDate() < currentDate.getDate()
+    ) {
+      return undefined;
     }
-
-    this.fruitCtrl.setValue(null);
-  }
-
-  remove(fruit: string): void {
-    const index = this.fruits.indexOf(fruit);
-
-    if (index >= 0) {
-      this.fruits.splice(index, 1);
-    }
-  }
-
-  selected(event: MatAutocompleteSelectedEvent): void {
-    this.fruits.push(event.option.viewValue);
-    this.fruitInput.nativeElement.value = '';
-    this.fruitCtrl.setValue(null);
-  }
-
-  private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
-
-    return this.allFruits.filter(
-      (fruit) => fruit.toLowerCase().indexOf(filterValue) === 0
-    );
-  }
-
-  option(value: boolean) {
-    this.isGroup = value;
-    this.showForm = true;
-  }
-  resetOptions() {
-    this.isGroup = false;
-    this.showForm = false;
+    
+    return {
+      name: this.name,
+      value: this.initialValue,
+      dateFinal: this.dateFinal,
+      isGrouped: false,
+      planningItems: [],
+    };
   }
 }

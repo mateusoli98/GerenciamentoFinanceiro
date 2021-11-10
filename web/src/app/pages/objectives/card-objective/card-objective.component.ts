@@ -1,3 +1,4 @@
+import { NumberFormatStyle } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ObjectiveResponse } from 'src/app/models/response/objectiveResponse.model';
@@ -84,5 +85,12 @@ export class CardObjectiveComponent implements OnInit {
     }
 
     return value;
+  }
+
+  formatValue(value: number) {
+    return new Intl.NumberFormat('pt-BR', {
+      style: 'currency',
+      currency: 'BRL',
+    }).format(value);
   }
 }

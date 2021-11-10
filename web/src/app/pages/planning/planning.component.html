@@ -5,18 +5,23 @@
 <span class="subtitle d-flex align-items-center mt-1">
   <mat-icon>person</mat-icon> Pessoal</span
 >
-<div class="d-flex flex-wrap">
+
+<div *ngIf="!plannings" style="margin-top: 20px">Carregando...</div>
+<div class="d-flex flex-wrap" *ngIf="plannings">
   <div class="m-1 card-planning-custom" *ngFor="let planning of plannings">
-    <app-card-planning [data]="planning"></app-card-planning>
+    <app-card-planning
+      [data]="planning"
+      (reload)="getPlannings()"
+    ></app-card-planning>
   </div>
 </div>
 
-<span class="subtitle d-flex align-items-center mt-1">
+<!-- <span class="subtitle d-flex align-items-center mt-1">
   <mat-icon>groups</mat-icon> Grupo</span
->
+> -->
 
-<div class="d-flex flex-wrap">
+<!-- <div class="d-flex flex-wrap" *ngIf="planningGroup">
   <div class="m-1 card-planning-custom" *ngFor="let planning of planningGroup">
     <app-card-planning [data]="planning"></app-card-planning>
   </div>
-</div>
+</div> -->

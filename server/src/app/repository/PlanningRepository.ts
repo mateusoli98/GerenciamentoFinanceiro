@@ -1,5 +1,5 @@
 import { Request } from "express";
-import { getRepository } from "typeorm";
+import { Between, getRepository } from "typeorm";
 import Planning from "../models/Planning";
 import User from "../models/User";
 import { IPlanningRepository } from "./repositoryInterfaces/IPlanningRepository";
@@ -25,8 +25,19 @@ class PlanningRepository implements IPlanningRepository {
 
   async getByUser(user: User, isGrouped: boolean): Promise<Array<Planning> | null> {
     const repository = getRepository(Planning);
+    const currentDate = new Date();
 
-    const plannings: Array<Planning> = await repository.find({ where: { user, isGrouped }, order: { created_at: "ASC" } });
+    const plannings: Array<Planning> = await repository.find({
+      where: {
+        user,
+        isGrouped,
+        dateFinal: Between(new Date(currentDate.getFullYear(), currentDate.getMonth(), 1), new Date(2100, 0, 1)),
+      },
+      order: {
+        created_at: "ASC",
+        isGrouped: "ASC",
+      },
+    });
 
     return plannings;
   }

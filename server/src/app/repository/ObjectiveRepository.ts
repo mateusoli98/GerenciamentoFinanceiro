@@ -27,9 +27,13 @@ class ObjectiveRepository implements IObjectiveRepository {
 
   async getByUser(user: User): Promise<Array<Objective> | null> {
     const repository = getRepository(Objective);
+    const currentDate = new Date();
 
     const objectives: Array<Objective> = await repository.find({
-      where: { user, dateFinal: Between(new Date(), new Date(2100, 0, 1)) },
+      where: {
+        user,
+        dateFinal: Between(new Date(currentDate.getFullYear(), currentDate.getMonth(), 1), new Date(2100, 0, 1)),
+      },
       order: { name: "ASC" },
     });
 

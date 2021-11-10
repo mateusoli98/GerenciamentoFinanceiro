@@ -67,7 +67,7 @@ class PlanningApp implements IPlanningApp {
       }
     }
 
-    delete planning.user.password;
+    delete planning.user;
 
     response.success = true;
     response.result = planning;
@@ -112,6 +112,8 @@ class PlanningApp implements IPlanningApp {
   async includePlanningItems(plannings: Array<Planning>): Promise<Array<Planning>> {
     const planningsTemp: Array<Planning> = plannings;
 
+    planningsTemp.forEach((p) => (p.value = Number(p.value)));
+
     let count = 1;
 
     planningsTemp.forEach(async (item: Planning) => {
@@ -123,6 +125,10 @@ class PlanningApp implements IPlanningApp {
         item.planningItems = new Array<PlanningItem>();
 
         planningItems.forEach((planningItem) => {
+          planningItem.totalValue = Number(planningItem.totalValue);
+          planningItem.entryValue = Number(planningItem.entryValue);
+          planningItem.category = Number(planningItem.category);
+
           item.planningItems.push({ ...planningItem });
         });
       }
@@ -177,7 +183,47 @@ class PlanningApp implements IPlanningApp {
   }
 
   async update(req: Request): Promise<ResultResponseModel> {
-    throw new Error("Method not implemented.");
+    let response: ResultResponseModel = new ResultResponseModel();
+    let validateRequest: ResultResponseModel = new ResultResponseModel();
+
+    validateRequest = this.validateRequest(req, true);
+
+    if (!validateRequest.success) {
+      return validateRequest;
+    }
+
+    const { planningGuid } = req.body;
+
+    const planning: Planning = await PlanningRepository.find(planningGuid);
+
+    if (!planning) {
+      response.success = false;
+      response.statusCode = httpStatusCodeEnum.NotFound;
+      response.errors.push({
+        message: "Planejamento não encontrado",
+      });
+
+      return response;
+    }
+
+    const { planningItems } = req.body;
+
+    if (!isUndefined(planningItems) && isArray(planningItems) && planningItems.length > 0) {
+      planningItems.forEach(async (item: PlanningItem) => {
+        if (!item.planningItemGuid) {
+          await PlanningItemRepository.create(item, planning);
+        } else {
+          await PlanningItemRepository.update(item, planning);
+        }
+      });
+    }
+
+    response.success = true;
+    response.result = {
+      message: "Planejamento atualizado com sucesso",
+    };
+
+    return response;
   }
 
   validateRequest(req: Request, isUpdated?: boolean) {

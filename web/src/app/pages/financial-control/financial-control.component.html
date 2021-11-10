@@ -66,21 +66,23 @@
       <ng-container matColumnDef="action">
         <th mat-header-cell *matHeaderCellDef>Ação</th>
         <td mat-cell *matCellDef="let element">
-          <mat-icon
-            style="cursor: pointer"
-            (click)="
-              deleteFinancialControl(
-                element.financialControlGuid,
-                element.income
-              )
-            "
-            >delete</mat-icon
-          >
-          <mat-icon
-            style="cursor: pointer"
-            (click)="editFinancialControl(element)"
-            >create</mat-icon
-          >
+          <div class="d-flex">
+            <mat-icon
+              style="cursor: pointer"
+              (click)="
+                deleteFinancialControl(
+                  element.financialControlGuid,
+                  element.income
+                )
+              "
+              >delete</mat-icon
+            >
+            <mat-icon
+              style="cursor: pointer"
+              (click)="editFinancialControl(element)"
+              >create</mat-icon
+            >
+          </div>
         </td>
       </ng-container>
 

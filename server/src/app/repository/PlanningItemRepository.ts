@@ -7,16 +7,16 @@ class PlanningItemRepository implements IPlanningItemRepository {
   async create(planningItemRef: PlanningItem, planningRef: Planning): Promise<boolean> {
     const repository = getRepository(PlanningItem);
 
-    const { name, value, category } = planningItemRef;
+    const { name, totalValue, entryValue, category } = planningItemRef;
 
     await repository
       .query(
         `INSERT INTO 
-            public."planningItem"(name, value, category, "planningGuid")
+            public."planningItem"(name, "totalValue", "entryValue", category, "planningGuid")
         VALUES 
-            ('${name}', ${value}, ${category}, '${planningRef.planningGuid}')`
+            ('${name}', ${totalValue}, ${entryValue}, ${category}, '${planningRef.planningGuid}')`
       )
-      .then((res) => {
+      .then(() => {
         return true;
       })
       .catch((ex) => {
@@ -33,7 +33,8 @@ class PlanningItemRepository implements IPlanningItemRepository {
       SELECT 
         "planningItemGuid", 
         name, 
-        value, 
+        "totalValue", 
+        "entryValue", 
         category, 
         created_at, 
         updated_at
@@ -42,7 +43,7 @@ class PlanningItemRepository implements IPlanningItemRepository {
       WHERE
         "planningGuid" = '${planning.planningGuid}'
       ORDER BY
-        created_at ASC
+        category ASC
     `);
 
     return planningItems;
@@ -55,6 +56,25 @@ class PlanningItemRepository implements IPlanningItemRepository {
       DELETE FROM public."planningItem"
       WHERE 
         "planningGuid" = '${planningGuid}';
+    `);
+
+    if (result) {
+      return true;
+    }
+
+    return false;
+  }
+
+  async update(planningItemRef: PlanningItem, planningRef: Planning): Promise<boolean> {
+    const repository = getRepository(PlanningItem);
+
+    const result = await repository.query(`
+      UPDATE public."planningItem"
+	    SET "entryValue" = ${planningItemRef.entryValue}
+      WHERE 
+        "planningItemGuid" = '${planningItemRef.planningItemGuid}'
+      AND
+        "planningGuid" = '${planningRef.planningGuid}'
     `);
 
     if (result) {

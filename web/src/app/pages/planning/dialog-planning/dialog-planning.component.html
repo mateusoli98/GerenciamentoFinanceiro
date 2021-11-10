@@ -1,6 +1,6 @@
 <h1 mat-dialog-title>Novo planejamento</h1>
 <div mat-dialog-content>
-  <div class="d-flex align-items-center justify-content-center" *ngIf="!showForm">
+  <!-- <div class="d-flex align-items-center justify-content-center" *ngIf="!showForm">
     <div
       class="item d-flex justify-content-center align-items-center flex-direction-column m-1"
       (click)="option(false)"
@@ -15,65 +15,37 @@
       <p>Grupo</p>
       <mat-icon>add</mat-icon>
     </div>
-  </div>
-  <form class="d-flex flex-direction-column" *ngIf="showForm">
+  </div> -->
+  <form class="d-flex flex-direction-column" [formGroup]="form">
     <mat-form-field>
       <mat-label>Nome</mat-label>
-      <input matInput type="text" />
+      <input matInput type="text" formControlName="name" />
     </mat-form-field>
 
     <mat-form-field>
       <mat-label>Valor total inicial</mat-label>
-      <input matInput type="number" />
+      <input matInput type="number" formControlName="initialValue" />
     </mat-form-field>
 
     <mat-form-field>
       <mat-label>Data final</mat-label>
-      <input matInput [matDatepicker]="picker" />
+      <input matInput [matDatepicker]="picker" formControlName="dateFinal" />
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
-
-    <mat-form-field class="example-chip-list" *ngIf="isGroup">
-      <mat-label>Integrantes da equipe</mat-label>
-      <mat-chip-list #chipList aria-label="Fruit selection">
-        <mat-chip
-          *ngFor="let fruit of fruits"
-          [selectable]="selectable"
-          [removable]="removable"
-          (removed)="remove(fruit)"
-        >
-          {{ fruit }}
-          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-        </mat-chip>
-        <input
-          #fruitInput
-          [formControl]="fruitCtrl"
-          [matAutocomplete]="auto"
-          [matChipInputFor]="chipList"
-          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-          (matChipInputTokenEnd)="add($event)"
-        />
-      </mat-chip-list>
-      <mat-autocomplete
-        #auto="matAutocomplete"
-        (optionSelected)="selected($event)"
-      >
-        <mat-option
-          *ngFor="let fruit of filteredFruits | async"
-          [value]="fruit"
-        >
-          {{ fruit }}
-        </mat-option>
-      </mat-autocomplete>
-    </mat-form-field>
-
   </form>
 </div>
 <div mat-dialog-actions class="d-flex justify-content-end">
-  <button mat-button color="primary" (click)="resetOptions()" *ngIf="showForm">
+  <!-- <button mat-button color="primary" (click)="resetOptions()" *ngIf="showForm">
     <mat-icon>arrow_back</mat-icon>
-  </button>
+  </button> -->
   <button mat-raised-button mat-dialog-close>Cancelar</button>
-  <button mat-raised-button color="primary" cdkFocusInitial>Salvar</button>
+  <button
+    mat-raised-button
+    color="primary"
+    cdkFocusInitial
+    (click)="savePlanning()"
+  >
+    Salvar
+  </button>
 </div>

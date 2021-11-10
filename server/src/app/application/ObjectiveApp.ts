@@ -79,6 +79,8 @@ class UserApp implements IObjectiveApp {
 
     objectives.forEach((obj) => {
       delete obj.user;
+      obj.totalValue = Number(obj.totalValue);
+      obj.entryValue = Number(obj.entryValue);
 
       const { totalValue, dateFinal, entryValue } = obj;
       const currentDate = new Date();

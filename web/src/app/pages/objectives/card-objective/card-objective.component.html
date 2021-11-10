@@ -1,9 +1,11 @@
 <mat-card class="example-card" *ngIf="data">
   <mat-card-header>
-    <mat-card-title>{{ data.name }} - R$ {{ data.totalValue }}</mat-card-title>
+    <mat-card-title
+      >{{ data.name }} - {{ formatValue(data.totalValue) }}</mat-card-title
+    >
     <mat-card-subtitle class="d-flex flex-direction-column">
       <span>Acaba em: {{ dateFinalFormater }} </span>
-      <span>Economize: R$ {{ data.valueMonth }} / mês</span>
+      <span>Economize: {{ formatValue(data.valueMonth) }} / mês</span>
     </mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>

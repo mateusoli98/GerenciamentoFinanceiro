@@ -18,7 +18,11 @@ export class CreatePlanningItems1630855285843 implements MigrationInterface {
             type: "varchar",
           },
           {
-            name: "value",
+            name: "totalValue",
+            type: "decimal",
+          },
+          {
+            name: "entryValue",
             type: "decimal",
           },
           {
