@@ -13,7 +13,7 @@ const router = Router();
 router.post(RoutesEnum.SignUp, UserController.signUp);
 router.post(RoutesEnum.Login, AuthController.authenticate);
 
-// Finalcial control
+// Financial controls
 router.post(RoutesEnum.FinancialControl, authMiddleware, FinancialControlController.create);
 router.get(RoutesEnum.FinancialControl, authMiddleware, FinancialControlController.getByUser);
 router.get(RoutesEnum.FinancialControlChartCurrentMonth, authMiddleware, FinancialControlController.getChartCurrentMonth);
@@ -27,7 +27,7 @@ router.get(RoutesEnum.Objective, authMiddleware, ObjectiveController.getByUser);
 router.delete(RoutesEnum.Objective, authMiddleware, ObjectiveController.delete);
 router.put(RoutesEnum.Objective, authMiddleware, ObjectiveController.update);
 
-// Planning
+// Plannings
 router.post(RoutesEnum.Planning, authMiddleware, PlanningController.create);
 router.get(RoutesEnum.Planning, authMiddleware, PlanningController.getByUser);
 router.delete(RoutesEnum.Planning, authMiddleware, PlanningController.delete);
